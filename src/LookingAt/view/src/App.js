@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import { Card, Button, Row, Col } from 'antd';
 
 const FrameRenderer = () => {
   const canvasRef = useRef(null);
@@ -20,20 +21,50 @@ const FrameRenderer = () => {
 
   useEffect(() => {
     if (lastMessage) {
-      // Os dados já estão em base64, não precisamos converter novamente
       const base64Data = lastMessage.data;
       drawImage(base64Data);
     }
   }, [lastMessage]);
 
-  return <canvas ref={canvasRef} width="640" height="480" />;
+  return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
 };
 
 const App = () => {
+  const personInfo = {
+    name: 'John Doe',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  };
+
+  const handleButton1Click = () => {
+    // chama a função/API correspondente
+  };
+
+  const handleButton2Click = () => {
+    // chama a função/API correspondente
+  };
+
+  const handleButton3Click = () => {
+    // chama a função/API correspondente
+  };
+
   return (
     <div>
       <h1>Imagem da câmera do drone</h1>
-      <FrameRenderer />
+      <Row gutter={16}>
+        <Col span={14}>
+          <FrameRenderer />
+        </Col>
+        <Col span={10}>
+          <Card title={personInfo.name}>
+            <p>{personInfo.description}</p>
+          </Card>
+        </Col>
+      </Row>
+      <Row justify="space-around" style={{ marginTop: '16px' }}>
+        <Button type="primary" onClick={handleButton1Click}>Iniciar</Button>
+        <Button type="primary" onClick={handleButton2Click}>Botão 2</Button>
+        <Button type="primary" onClick={handleButton3Click}>Identificar</Button>
+      </Row>
     </div>
   );
 };

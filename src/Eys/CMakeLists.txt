@@ -1,27 +1,54 @@
 cmake_minimum_required(VERSION 3.10)
 project(Eys)
 
+option(CROSS_COMPILE_ARM "Cross compile for ARM" ON)
+
+if(CROSS_COMPILE_ARM)
+    set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) 
+else()
+    set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/build)
+endif()
+
+find_package(OpenCV REQUIRED)  # Adicione esta linha
+
 set(CMAKE_CXX_STANDARD 14)
 set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) # Adicione esta linha
 
-# Cross compiling configuration
-set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm)
+if(CROSS_COMPILE_ARM)
 
-set(CMAKE_BUILD_TYPE Debug)
+    set(CMAKE_SYSTEM_NAME Linux)
+    set(CMAKE_SYSTEM_PROCESSOR arm)
+    set(CMAKE_BUILD_TYPE Debug)
+    # set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) 
 
-set(tools /usr)
-set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
-set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)
+    set(tools /usr)
+    set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
+    set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)
 
-# Compiling flags for Raspberry Pi
-add_compile_options(-march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard -mtune=cortex-a72)
+    add_compile_options(-march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard -mtune=cortex-a72)
+
+    set(EXECUTABLE_NAME Eys)
+
+else()
+
+    set(CMAKE_SYSTEM_NAME Linux)
+    set(CMAKE_SYSTEM_PROCESSOR x86_64)
+    set(CMAKE_BUILD_TYPE Debug)
+    # set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/build)
+    set(CMAKE_C_COMPILER gcc)
+    set(CMAKE_CXX_COMPILER g++)
+
+    add_compile_options(-march=native)
+
+    set(EXECUTABLE_NAME Eys_x86)
+
+endif()
+
 
 # Enable testing
 enable_testing()
 
 # Find the required packages for the project
-find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(GTest REQUIRED)
@@ -30,11 +57,10 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Create the executable
-add_executable(Eys main.cpp Eys.cpp Session.cpp)
+add_executable(${EXECUTABLE_NAME} main.cpp Eys.cpp Session.cpp)
 
 # Link the required libraries
-target_link_libraries(Eys ${OpenCV_LIBS} ${Boost_LIBRARIES}  Threads::Threads)
+target_link_libraries(${EXECUTABLE_NAME}  ${OpenCV_LIBS} ${Boost_LIBRARIES}  Threads::Threads)
 
 # add_executable(tests your_test_file.cpp)
 # target_link_libraries(tests ${GTEST_BOTH_LIBRARIES} pthread)
-
