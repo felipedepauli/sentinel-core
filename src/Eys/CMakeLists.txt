@@ -3,24 +3,17 @@ project(Eys)
 
 option(CROSS_COMPILE_ARM "Cross compile for ARM" ON)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_SYSTEM_NAME Linux)
+
 if(CROSS_COMPILE_ARM)
-    set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) 
-else()
-    set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/build)
+    set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/platforms/linux/build_hardfp) 
 endif()
 
-find_package(OpenCV REQUIRED)  # Adicione esta linha
-
-set(CMAKE_CXX_STANDARD 14)
-set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) # Adicione esta linha
-
 if(CROSS_COMPILE_ARM)
 
-    set(CMAKE_SYSTEM_NAME Linux)
     set(CMAKE_SYSTEM_PROCESSOR arm)
     set(CMAKE_BUILD_TYPE Debug)
-    # set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/platforms/linux/build_hardfp) 
-
     set(tools /usr)
     set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
     set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)
@@ -31,10 +24,8 @@ if(CROSS_COMPILE_ARM)
 
 else()
 
-    set(CMAKE_SYSTEM_NAME Linux)
     set(CMAKE_SYSTEM_PROCESSOR x86_64)
     set(CMAKE_BUILD_TYPE Debug)
-    # set(OpenCV_DIR /home/fpauli/git/opencv-4.5.4/build)
     set(CMAKE_C_COMPILER gcc)
     set(CMAKE_CXX_COMPILER g++)
 
@@ -43,12 +34,13 @@ else()
     set(EXECUTABLE_NAME Eys_x86)
 
 endif()
-
-
-# Enable testing
+    
+    
+    # Enable testing
 enable_testing()
 
 # Find the required packages for the project
+find_package(OpenCV REQUIRED)  # Adicione esta linha
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(GTest REQUIRED)
