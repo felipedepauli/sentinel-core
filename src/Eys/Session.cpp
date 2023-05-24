@@ -77,9 +77,9 @@ int Session::process() {
         auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
         // Se demorou menos tempo do que o intervalo de quadros desejado, durma pelo tempo restante
-        if (elapsedTime < frameInterval) {
-            std::this_thread::sleep_for(frameInterval - elapsedTime);
-        }
+        // if (elapsedTime < frameInterval) {
+        //     std::this_thread::sleep_for(frameInterval - elapsedTime);
+        // }
     }
 
     return 0;

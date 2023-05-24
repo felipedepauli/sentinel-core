@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { Card, Button, Row, Col } from 'antd';
+import CommandButton from './components/CommandButtons.js'
 
 const FrameRenderer = () => {
   const canvasRef = useRef(null);
@@ -16,7 +17,7 @@ const FrameRenderer = () => {
     };
   };
 
-  const socketUrl = 'ws://localhost:8081';
+  const socketUrl = 'http://192.168.25.56:5000';
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
   useEffect(() => {
@@ -60,10 +61,15 @@ const App = () => {
           </Card>
         </Col>
       </Row>
-      <Row justify="space-around" style={{ marginTop: '16px' }}>
-        <Button type="primary" onClick={handleButton1Click}>Iniciar</Button>
-        <Button type="primary" onClick={handleButton2Click}>Botão 2</Button>
-        <Button type="primary" onClick={handleButton3Click}>Identificar</Button>
+      <Row justify="center" style={{ marginTop: '16px' }}>
+        <CommandButton label="^" command="throttle_up" style={{ gridColumn: '2', gridRow: '1' }} />
+      </Row>
+      <Row justify="center" style={{ marginTop: '16px' }}>
+        <CommandButton label="<" command="turn_left" style={{ gridColumn: '1', gridRow: '2' }} />
+        <CommandButton label=">" command="turn_right" style={{ gridColumn: '3', gridRow: '2' }} />
+      </Row>
+      <Row justify="center" style={{ marginTop: '16px' }}>
+        <CommandButton label="v" command="throttle_down" style={{ gridColumn: '2', gridRow: '3' }} />
       </Row>
     </div>
   );
