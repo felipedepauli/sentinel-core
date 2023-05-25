@@ -27,6 +27,9 @@ class CommandButton extends React.Component {
     if (this.props.onClick) {
       this.props.onClick();
     }
+    if (this.props.toggleIcon) {
+      this.setState({ isPressed: !this.state.isPressed });
+    }
   }
 
   render() {
