@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { Card, Button, Row, Col } from 'antd';
 import CommandButton from './components/CommandButtons.js'
+
+import './App.css';
 
 const FrameRenderer = () => {
   const canvasRef = useRef(null);
@@ -17,7 +19,7 @@ const FrameRenderer = () => {
     };
   };
 
-  const socketUrl = 'http://192.168.25.56:5000';
+  const socketUrl = 'ws://localhost:8080';
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
   useEffect(() => {
@@ -31,10 +33,16 @@ const FrameRenderer = () => {
 };
 
 const App = () => {
-  const personInfo = {
-    name: 'John Doe',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  };
+  const [personInfo, setPersonInfo] = useState({ name: 'Nobody', description: '...' });
+
+  const authenticate = () => {
+    setPersonInfo({
+      name: 'Looking For',
+      description: 'Wait authentication...'
+    });
+  
+  
+  }
 
   const handleButton1Click = () => {
     // chama a função/API correspondente
@@ -49,29 +57,46 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Imagem da câmera do drone</h1>
-      <Row gutter={16}>
-        <Col span={14}>
-          <FrameRenderer />
-        </Col>
-        <Col span={10}>
-          <Card title={personInfo.name}>
-            <p>{personInfo.description}</p>
-          </Card>
-        </Col>
-      </Row>
-      <Row justify="center" style={{ marginTop: '16px' }}>
-        <CommandButton label="^" command="throttle_up" style={{ gridColumn: '2', gridRow: '1' }} />
-      </Row>
-      <Row justify="center" style={{ marginTop: '16px' }}>
-        <CommandButton label="<" command="turn_left" style={{ gridColumn: '1', gridRow: '2' }} />
-        <CommandButton label=">" command="turn_right" style={{ gridColumn: '3', gridRow: '2' }} />
-      </Row>
-      <Row justify="center" style={{ marginTop: '16px' }}>
-        <CommandButton label="v" command="throttle_down" style={{ gridColumn: '2', gridRow: '3' }} />
-      </Row>
-    </div>
+    <div class="main">
+		<div className="program_name">
+      		<h1>Sentinel Eyes</h1>
+		</div>
+		<div className="program_image">	
+				<FrameRenderer />
+		</div>
+		<div className="program_desc">
+        <Card className="program_desc__block" title={personInfo.name}>
+          <p>{personInfo.description}</p>
+        </Card>
+		</div>
+		<div className='program_panel'>
+          
+		  	<div className='controller__section controller__section--left'>
+          		<CommandButton command="start" text="Turn drone on" icon="TbDrone" toggleIcon="TbDroneOff"/>
+          	</div>
+
+          	<div className='controller__section controller__section--center'>
+				<div className="controller__section--center__top">
+					<CommandButton command="throttle_up" text="Throttle Up" icon="BsFillArrowUpCircleFill"/>
+				</div>
+				<div className="controller__section--center__middle">
+					<CommandButton command="turn_left" text="Turn Left" icon="BsFillArrowLeftCircleFill"/>
+					<CommandButton command="stop_all" text="Stop" icon="BsStopCircleFill"/>
+					<CommandButton command="turn_right" text="Turn Right" icon="BsFillArrowRightCircleFill"/>
+				</div>
+				<div className="controller__section--center__bottom">
+					<CommandButton command="throttle_down" text="Throttle Down" icon="BsFillArrowDownCircleFill"/>
+				</div>
+			</div>
+
+          	<div className='controller__section controller__section--right'>
+				<CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
+          	</div>
+            {/* BsPersonBoundingBox */}
+            {/* ImTarget */}
+		</div>
+        
+      </div>
   );
 };
 
