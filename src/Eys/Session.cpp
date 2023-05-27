@@ -8,8 +8,9 @@
 constexpr uint64_t expected_header = 0x5247424559455345; // "EYESBGR"
 
 Session::Session(boost::asio::ip::tcp::socket socket)
-    : socket_(std::move(socket))
+    : socket_(std::move(socket)), evilEys_()
 {
+    std::cout << "[Session::Info] Session created." << std::endl;
 }
 
 Session::~Session() {
@@ -20,35 +21,10 @@ void Session::start() {
     process();
 }
 
-void Session::send_header() {
-
-}
-
-int Session::openCamera(cv::VideoCapture &cap) {
-    // A variável cap é uma referência para um objeto VideoCapture, que é uma classe do OpenCV para captura de vídeo
-    // Ele tem como argumento uma string com o pipeline do GStreamer usado para abrir a câmera Raspberry Pi
-    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
-    std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
-    // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
-
-
-
-    // Abre a câmera usando o GStreamer
-    // cap.open(pipeline, cv::CAP_GSTREAMER);
-    cap.open(0);
-    
-    // Aqui tem a verificação se a câmera foi aberta com sucesso
-    // Se não foi, imprime uma mensagem de erro e retorna -1, que encerrará o programa na hora
-    if (!cap.isOpened()) {
-        std::cerr << "Erro ao abrir a câmera." << std::endl;
-        return -1;
-    }
-    return 0;
-}
-
 int Session::process() {
-    cv::VideoCapture cap;
-    if (openCamera(cap) != 0) {
+    // If you want to know all the CV conf (done on compilation time)
+    // std::cout << "CV " << cv::getBuildInformation() << std::endl;
+    if (evilEys_.openEyes() != 0) {
         return -1;
     }
 
@@ -63,7 +39,7 @@ int Session::process() {
         auto startTime = std::chrono::steady_clock::now();
 
         cv::Mat frame;
-        cap >> frame;
+        frame = evilEys_.spark();
 
         if (frame.empty()) {
             std::cerr << "[Session::Info] Frame is empty!" << std::endl;
@@ -77,9 +53,9 @@ int Session::process() {
         auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
         // Se demorou menos tempo do que o intervalo de quadros desejado, durma pelo tempo restante
-        // if (elapsedTime < frameInterval) {
-        //     std::this_thread::sleep_for(frameInterval - elapsedTime);
-        // }
+        if (elapsedTime < frameInterval) {
+            std::this_thread::sleep_for(frameInterval - elapsedTime);
+        }
     }
 
     return 0;
@@ -120,7 +96,4 @@ void Session::send_frame(const cv::Mat& frame) {
 
     // 4. Enviar os dados da imagem
     boost::asio::write(socket_, boost::asio::buffer(buffer.data(), bufferSize));
-
-    // // Wait for 1 seg
-    // std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }

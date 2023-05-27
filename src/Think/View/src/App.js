@@ -14,7 +14,10 @@ const FrameRenderer = () => {
     img.onload = () => {
       if (canvasRef.current) {
         const ctx = canvasRef.current.getContext('2d');
-        ctx.drawImage(img, 0, 0);
+        // Ajusta a largura e a altura do canvas para corresponder à da imagem
+        canvasRef.current.width = img.width;
+        canvasRef.current.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
       }
     };
   };
@@ -29,7 +32,7 @@ const FrameRenderer = () => {
     }
   }, [lastMessage]);
 
-  return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
+  return <canvas ref={canvasRef} style={{ width: '640', height: '480' }} />;
 };
 
 const App = () => {

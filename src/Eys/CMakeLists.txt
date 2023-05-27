@@ -8,6 +8,8 @@ set(CMAKE_SYSTEM_NAME Linux)
 
 if(CROSS_COMPILE_ARM)
     set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/platforms/linux/build_hardfp) 
+else()
+    set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/build_pcx64) 
 endif()
 
 if(CROSS_COMPILE_ARM)
@@ -31,7 +33,7 @@ else()
 
     add_compile_options(-march=native)
 
-    set(EXECUTABLE_NAME Eys_x86)
+    set(EXECUTABLE_NAME Eys_x64)
 
 endif()
     
@@ -49,7 +51,7 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Create the executable
-add_executable(${EXECUTABLE_NAME} main.cpp Eys.cpp Session.cpp)
+add_executable(${EXECUTABLE_NAME} main.cpp WakeUP.cpp Session.cpp Eys.cpp)
 
 # Link the required libraries
 target_link_libraries(${EXECUTABLE_NAME}  ${OpenCV_LIBS} ${Boost_LIBRARIES}  Threads::Threads)

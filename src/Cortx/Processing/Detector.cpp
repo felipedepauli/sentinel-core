@@ -19,7 +19,7 @@
  * and loads the Yolo neural network with the given configuration and weights.
  */
 Detector::Detector(const std::string& labels_, const std::string& yolo_cfg, const std::string& yolo_weights)
-    : probability_minimum(0.5), threshold(0.3) {
+    : probability_minimum(0.3), threshold(0.3) {
     // Load Yolo neural network
     network = cv::dnn::readNetFromDarknet(yolo_cfg, yolo_weights);
 

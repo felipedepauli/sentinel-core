@@ -12,32 +12,31 @@ void WakeUP::run() {
 void WakeUP::listening() {
     
     // Step 01. Initiate asynchronous accept operation.
-    
-    std::cout << "[WakeUP::Info] Waiting for new connection." << std::endl;
+    std::cout << "[WakeUP::Info] Waiting for new connection" << std::endl;
     acceptor_.async_accept(
 
         // Step 02. Connection accepted handler.
         [this](boost::system::error_code ec, boost::asio::ip::tcp::socket socket) {
             if (!ec) {
-                std::cout << "[WakeUP::Info] New connection accepted." << std::endl;
+                std::cout << "[WakeUP::Info] New connection accepted" << std::endl;
 
-                // Step 03. Create new session and start it.
-                auto new_session = std::make_shared<Eys>(std::move(socket));
+                // Step 03. Create a new session and start it.
+                auto new_session = std::make_shared<Session>(std::move(socket));
                 
-                // Step 04. 
+                // Step 04. Create a new thread and associate new_session->start to it
                 session_threads_.push_back(std::make_shared<std::thread>([new_session]() {
                     try {
                         new_session->start();
                     } catch (const std::exception& e) {
-                        std::cerr << "[WakeUP::Info] Client disconnected."<< std::endl;
+                        std::cerr << "[WakeUP::Info] Client disconnected"<< std::endl;
                     } catch (...) {
-                        std::cerr << "[WakeUP::Error] Unknown exception occurred in session." << std::endl;
+                        std::cerr << "[WakeUP::Error] Unknown exception occurred in session" << std::endl;
                     }
                 }));
             } else {
                 std::cerr << "[WakeUP::Error] Error accepting new connection: " << ec.message() << std::endl;
             }
-
+            // Step 05. After create or not a new session, it will return to initial listening state
             listening();
         });
 }

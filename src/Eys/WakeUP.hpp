@@ -19,7 +19,7 @@
 #include <memory>
 #include <thread>
 #include <vector>
-#include "Eys.hpp"
+#include "Session.hpp"
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -32,17 +32,15 @@ using boost::asio::ip::tcp;
 /**
  * @class WakeUP
  * @brief Handle new connections.
- */
+ */ 
 class WakeUP {
 public:
     /**
      * @brief Constructor for the WakeUP server.
-     *
      * @param port The port on which the server will run.
      */
     WakeUP(short port);
     
-    /**
     /**
      * @brief Runs the server, starting the event loop for incoming connections.
      */
@@ -54,7 +52,7 @@ private:
      */
     void listening();
 
-    boost::asio::io_context io_context_;
-    tcp::acceptor acceptor_;
-    std::vector<std::shared_ptr<std::thread>> session_threads_;
+    boost::asio::io_context io_context_;                        /// Keeps the context of boost. It has the context and the object used to accept new connections
+    tcp::acceptor acceptor_;                                    /// Object to accept new connections
+    std::vector<std::shared_ptr<std::thread>> session_threads_; /// All new session will be here
 };
