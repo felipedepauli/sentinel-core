@@ -28,14 +28,14 @@ int Session::openCamera(cv::VideoCapture &cap) {
     // A variável cap é uma referência para um objeto VideoCapture, que é uma classe do OpenCV para captura de vídeo
     // Ele tem como argumento uma string com o pipeline do GStreamer usado para abrir a câmera Raspberry Pi
     // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
-    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
-    // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
     std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
+    // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
 
 
 
     // Abre a câmera usando o GStreamer
-    cap.open(pipeline, cv::CAP_GSTREAMER);
+    // cap.open(pipeline, cv::CAP_GSTREAMER);
+    cap.open(0);
     
     // Aqui tem a verificação se a câmera foi aberta com sucesso
     // Se não foi, imprime uma mensagem de erro e retorna -1, que encerrará o programa na hora
