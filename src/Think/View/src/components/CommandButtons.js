@@ -4,8 +4,6 @@ import axios from 'axios';
 import iconMap from './IconMap.js';
 import { Button } from 'antd';
 
-
-
 class CommandButton extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +11,9 @@ class CommandButton extends React.Component {
       isPressed: true,
     };
   }
+  
   sendCommand(command) {
-    axios.post('http://localhost:5000/api/command', {
+    axios.post('http://192.168.137.2:5000/api/command', {
       command: command
     })
     .then(function (response) {
@@ -27,6 +26,7 @@ class CommandButton extends React.Component {
     if (this.props.onClick) {
       this.props.onClick();
     }
+
     if (this.props.toggleIcon) {
       this.setState({ isPressed: !this.state.isPressed });
     }
@@ -45,6 +45,4 @@ class CommandButton extends React.Component {
   }
 }
 
-export default CommandButton
-
-
+export default CommandButton;

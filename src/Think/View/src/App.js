@@ -34,6 +34,7 @@ const FrameRenderer = () => {
 
 const App = () => {
   const [personInfo, setPersonInfo] = useState({ name: 'Nobody', description: '...' });
+  const [droneStarted, setDroneStarted] = useState(false);
 
   const authenticate = () => {
     setPersonInfo({
@@ -41,20 +42,11 @@ const App = () => {
       description: 'Wait authentication...'
     });
   
-  
   }
 
-  const handleButton1Click = () => {
-    // chama a função/API correspondente
-  };
-
-  const handleButton2Click = () => {
-    // chama a função/API correspondente
-  };
-
-  const handleButton3Click = () => {
-    // chama a função/API correspondente
-  };
+  const toggleDrone = () => {
+    setDroneStarted(!droneStarted);
+  }
 
   return (
     <div class="main">
@@ -71,26 +63,26 @@ const App = () => {
 		</div>
 		<div className='program_panel'>
           
-		  	<div className='controller__section controller__section--left'>
-          		<CommandButton command="start" text="Turn drone on" icon="TbDrone" toggleIcon="TbDroneOff"/>
-          	</div>
+        <div className='controller__section controller__section--left'>
+          <CommandButton command={droneStarted ? "stopDrone" : "startDrone"} text="Toggle drone" icon="TbDrone" toggleIcon="TbDroneOff" onClick={toggleDrone}/>
+        </div>
 
           	<div className='controller__section controller__section--center'>
 				<div className="controller__section--center__top">
-					<CommandButton command="throttle_up" text="Throttle Up" icon="BsFillArrowUpCircleFill"/>
+					<CommandButton command="riseUp" text="Throttle Up" icon="BsFillArrowUpCircleFill"/>
 				</div>
 				<div className="controller__section--center__middle">
-					<CommandButton command="turn_left" text="Turn Left" icon="BsFillArrowLeftCircleFill"/>
-					<CommandButton command="stop_all" text="Stop" icon="BsStopCircleFill"/>
-					<CommandButton command="turn_right" text="Turn Right" icon="BsFillArrowRightCircleFill"/>
+					<CommandButton command="spinLeft" text="Turn Left" icon="BsFillArrowLeftCircleFill"/>
+					<CommandButton command="floating" text="Stop" icon="BsStopCircleFill"/>
+					<CommandButton command="spinRight" text="Turn Right" icon="BsFillArrowRightCircleFill"/>
 				</div>
 				<div className="controller__section--center__bottom">
-					<CommandButton command="throttle_down" text="Throttle Down" icon="BsFillArrowDownCircleFill"/>
+					<CommandButton command="fallDown" text="Throttle Down" icon="BsFillArrowDownCircleFill"/>
 				</div>
 			</div>
 
           	<div className='controller__section controller__section--right'>
-				<CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
+					<CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
           	</div>
             {/* BsPersonBoundingBox */}
             {/* ImTarget */}
