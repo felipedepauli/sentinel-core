@@ -52,7 +52,7 @@ const App = () => {
   }
 
   return (
-    <div class="main">
+    <div className="main">
 		<div className="program_name">
       		<h1>Sentinel Eyes</h1>
 		</div>

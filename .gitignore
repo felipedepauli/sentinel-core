@@ -15,6 +15,7 @@ Makefile
 
 # Diretório de compilação e cache do C++
 **/build/
+**/build*
 **/Debug/
 **/Release/
 
