@@ -6,6 +6,7 @@ import CommandButton from './components/CommandButtons.js'
 import './App.css';
 
 const FrameRenderer = () => {
+  console.log("frame renderer")
   const canvasRef = useRef(null);
 
   const drawImage = (base64Data) => {
@@ -22,17 +23,18 @@ const FrameRenderer = () => {
     };
   };
 
-  const socketUrl = 'ws://localhost:8080';
+  const socketUrl = 'ws://localhost:8080/web';
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
   useEffect(() => {
     if (lastMessage) {
       const base64Data = lastMessage.data;
       drawImage(base64Data);
+      console.log(base64Data)
     }
   }, [lastMessage]);
 
-  return <canvas ref={canvasRef} style={{ width: '640', height: '480' }} />;
+  return <canvas ref={canvasRef} style={{ width: 640, height: 480 }} />;
 };
 
 const App = () => {

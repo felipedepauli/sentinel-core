@@ -1,26 +1,27 @@
 import face_recognition
+import cv2
 
 class Detector:
     def __init__(self):
         # Load sample images and extract face encodings
+        print("[Auth::Info] Loading database...")
+        self.amorinha_face_encoding = self.load_encoding("../Think/Memory/pics/Amorinha.jpg")
         self.modi_face_encoding = self.load_encoding("../Think/Memory/pics/Modi.jpg")
         self.trump_face_encoding = self.load_encoding("../Think/Memory/pics/Trump.jpg")
         self.felps_face_encoding = self.load_encoding("../Think/Memory/pics/Felps.jpg")
         self.boechat_face_encoding = self.load_encoding("../Think/Memory/pics/Boechat.jpg")
 
-        # Create arrays of known face encodings and their names
-        self.known_face_encodings = [self.modi_face_encoding, self.trump_face_encoding, self.felps_face_encoding, self.boechat_face_encoding]
-        self.known_face_names = ["Narendra Modi", "Donald Trump", "Felps de Pauli", "Ricardo Boechat"]
+        self.known_face_encodings = [self.amorinha_face_encoding, self.modi_face_encoding, self.trump_face_encoding, self.felps_face_encoding, self.boechat_face_encoding]
+        self.known_face_names = ["Amorinha Vieira", "Narendra Modi", "Donald Trump", "Felps de Pauli", "Ricardo Boechat"]
+        # Loaded sample images and extracted face encodings
+        print("[Auth::Info] Database loaded")
     
     def load_encoding(self, image_path):
-        print(f'[Detector] Loading encoding from {image_path}')
         image = face_recognition.load_image_file(image_path)
         encoding = face_recognition.face_encodings(image)[0]
-        print(f'[Detector] Loaded encoding from {image_path}')
         return encoding
 
     def annotate_frame(self, frame):
-        print('[Detector] Annotating frame')
         # Resize frame of video to 1/4 size for faster face detection processing
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
@@ -59,5 +60,4 @@ class Detector:
                 continue
             cv2.putText(frame, name, (left_pos, bottom_pos), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1)
         
-        print('[Detector] Annotated frame')
-        return frame
+        return frame, 10

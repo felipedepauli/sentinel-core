@@ -10,11 +10,11 @@ void WakeUP::run() {
 }
 
 void WakeUP::listening() {
-    
+
     // Step 01. Initiate asynchronous accept operation.
     std::cout << "[WakeUP::Info] Waiting for new connection" << std::endl;
     acceptor_.async_accept(
-
+    
         // Step 02. Connection accepted handler.
         [this](boost::system::error_code ec, boost::asio::ip::tcp::socket socket) {
             if (!ec) {
@@ -22,7 +22,7 @@ void WakeUP::listening() {
 
                 // Step 03. Create a new session and start it.
                 auto new_session = std::make_shared<Session>(std::move(socket));
-                
+
                 // Step 04. Create a new thread and associate new_session->start to it
                 session_threads_.push_back(std::make_shared<std::thread>([new_session]() {
                     try {
@@ -31,11 +31,11 @@ void WakeUP::listening() {
                         std::cerr << "[WakeUP::Info] Client disconnected"<< std::endl;
                     } catch (...) {
                         std::cerr << "[WakeUP::Error] Unknown exception occurred in session" << std::endl;
-                    }
+        }
                 }));
             } else {
                 std::cerr << "[WakeUP::Error] Error accepting new connection: " << ec.message() << std::endl;
-            }
+    }
             // Step 05. After create or not a new session, it will return to initial listening state
             listening();
         });
