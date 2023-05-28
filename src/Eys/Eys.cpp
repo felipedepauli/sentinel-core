@@ -1,41 +1,35 @@
 #include "Eys.hpp"
 
-Eys::Eys(short port)
-    : acceptor_(io_context_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)) {
-    do_accept();
+Eys::Eys() {
+    std::cout << "[Eys::Info] Opening eyes!" << std::endl;
 }
-void Eys::run() {
-    io_context_.run();
+Eys::~Eys() {
+    std::cout << "[Eys::Info] Closing eyes." << std:: endl;
 }
+int Eys::openEyes() {
+    // A variável cap é uma referência para um objeto VideoCapture, que é uma classe do OpenCV para captura de vídeo
+    // Ele tem como argumento uma string com o pipeline do GStreamer usado para abrir a câmera Raspberry Pi
+    std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=4 ! videoconvert ! appsink";
+    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
+    // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
+    cap.set(cv::CAP_PROP_BUFFERSIZE, 2); // O buffer interno armazenará apenas 3 frames
 
-void Eys::do_accept() {
+
+    // Abre a câmera usando o GStreamer
+    cap.open(pipeline, cv::CAP_GSTREAMER);
     
-    // Initiate asynchronous accept operation.
-    std::cout << "[Eys::Info] Waiting for new connection." << std::endl;
-    acceptor_.async_accept(
-        // Connection accepted handler.
-        [this](boost::system::error_code ec, boost::asio::ip::tcp::socket socket) {
-            if (!ec) {
-                std::cout << "[Eys::Info] New connection accepted." << std::endl;
+    // Aqui tem a verificação se a câmera foi aberta com sucesso
+    // Se não foi, imprime uma mensagem de erro e retorna -1, que encerrará o programa na hora
+    if (!cap.isOpened()) {
+        std::cerr << "[Eys::Error] Error opening eyes..." << std::endl;
+        return -1;
+    }
+    return 0;
+}
 
-                // Create new session and start it.
-                auto new_session = std::make_shared<Session>(std::move(socket));
-                
-                std::cout << "[Eys::Info] Starting new session." << std::endl;
-                session_threads_.push_back(std::make_shared<std::thread>([new_session]() {
-                    try {
-                        new_session->start();
-                    } catch (const std::exception& e) {
-                        std::cerr << "[Eys::Info] Client disconnected."<< std::endl;
-                    } catch (...) {
-                        std::cerr << "[Eys::Error] Unknown exception occurred in session." << std::endl;
-                    }
-                }));
-            } else {
-                std::cerr << "[Eys::Error] Error accepting new connection: " << ec.message() << std::endl;
-            }
-
-            do_accept();
-        });
+cv::Mat Eys::spark() {
+    cv::Mat frame;
+    cap >> frame;
+    return frame;
 }
 

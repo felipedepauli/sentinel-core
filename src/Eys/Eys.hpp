@@ -19,7 +19,6 @@
 #include <memory>
 #include <thread>
 #include <vector>
-#include "Session.hpp"
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -40,21 +39,23 @@ public:
      *
      * @param port The port on which the server will run.
      */
-    Eys(short port);
+    Eys();
+    ~Eys();
     
     /**
-    /**
-     * @brief Runs the server, starting the event loop for incoming connections.
+     * @brief Opens the camera device.
+     * @param cap Reference to the VideoCapture object.
+     * @return 0 if the camera is opened successfully, -1 otherwise.
      */
-    void run();
+    int openEyes();
+    cv::Mat spark();
 
 private:
     /**
+     * 
      * @brief Starts an asynchronous operation to accept a new connection.
      */
     void do_accept();
 
-    boost::asio::io_context io_context_;
-    tcp::acceptor acceptor_;
-    std::vector<std::shared_ptr<std::thread>> session_threads_;
+    cv::VideoCapture cap;
 };

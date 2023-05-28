@@ -15,8 +15,10 @@ Makefile
 
 # Diretório de compilação e cache do C++
 **/build/
+**/build*
 **/Debug/
 **/Release/
+**/__pycache__
 
 # Arquivos e diretórios gerados pelo Node.js
 **/node_modules/

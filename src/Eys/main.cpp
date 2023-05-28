@@ -22,7 +22,7 @@
 
 #include <iostream>
 #include <boost/asio.hpp>
-#include "Eys.hpp"
+#include "WakeUP.hpp"
 
 /**
  * @brief Main entry point for the Eys server. 
@@ -39,8 +39,8 @@ int main(int argc, char *argv[]) {
     }
 
     try {       
-        Eys myEys(std::atoi(argv[1]));
-        myEys.run();
+        WakeUP sentinel(std::atoi(argv[1]));
+        sentinel.run();
         std::cout << "[cli::inf] Server started on port " << argv[1] << std::endl;
         
     } catch (std::exception &e) {
