@@ -9,8 +9,8 @@ Eys::~Eys() {
 int Eys::openEyes() {
     // A variável cap é uma referência para um objeto VideoCapture, que é uma classe do OpenCV para captura de vídeo
     // Ele tem como argumento uma string com o pipeline do GStreamer usado para abrir a câmera Raspberry Pi
-    std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=4 ! videoconvert ! appsink";
-    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
+    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=4 ! videoconvert ! appsink";
+    std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
     // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
     cap.set(cv::CAP_PROP_BUFFERSIZE, 2); // O buffer interno armazenará apenas 3 frames
 

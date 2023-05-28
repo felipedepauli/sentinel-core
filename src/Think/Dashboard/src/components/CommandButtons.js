@@ -13,7 +13,7 @@ class CommandButton extends React.Component {
   }
   
   sendCommand(command) {
-    axios.post('http://localhost:5000/api/command', {
+    axios.post('http://192.168.137.2:5000/api/command', {
       command: command
     })
     .then(function (response) {

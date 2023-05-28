@@ -9,9 +9,20 @@ from cv2 import imencode
 import json
 import base64
 
+import sys
+
+# Verifica o número de argumentos passados
+if len(sys.argv) < 3:
+    print("usage: python programa.py [ip] [port]")
+    sys.exit(1)
+
+# Obtém o argumento passado
+argumento = sys.argv[1]
+print("Argumento:", argumento)
+print("Argumento:", sys.argv[2])
 # Conecta ao servidor
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('localhost', 30001))  # Substitua 'localhost' e 12345 pelo endereço e porta do seu servidor
+s.connect((sys.argv[1], int(sys.argv[2])))
 
 detector = Detector()
 
