@@ -2,6 +2,25 @@
 const fs = require('fs').promises;
 const http = require('http');
 const WebSocket = require('ws');
+const express = require('express');
+const mongoose = require('mongoose');
+const apiRoutes = require('./api');
+
+const app = express()
+
+// Configuração da conexão do MongoDB
+const dbAddress = 'mongodb://sentinel_memory:27017/sentinel-eyes';
+
+mongoose.connect(dbAddress, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
+
+app.use(express.json());
+app.use('/', apiRoutes);
+
+console.log(1)
+app.listen(8081, () => console.log(`Listening on port 8081...`));
+console.log(2)
 
 // Creating HTTP server
 const server = http.createServer();

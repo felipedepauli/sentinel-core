@@ -1,25 +1,32 @@
 import face_recognition
 import cv2
+import os
 
 class Detector:
     def __init__(self):
         # Load sample images and extract face encodings
         print("[Auth::Info] Loading database...")
-        self.amorinha_face_encoding = self.load_encoding("../Think/Memory/pics/Amorinha.jpg")
-        self.modi_face_encoding = self.load_encoding("../Think/Memory/pics/Modi.jpg")
-        self.trump_face_encoding = self.load_encoding("../Think/Memory/pics/Trump.jpg")
-        self.felps_face_encoding = self.load_encoding("../Think/Memory/pics/Felps.jpg")
-        self.boechat_face_encoding = self.load_encoding("../Think/Memory/pics/Boechat.jpg")
+        self.amorinha_face_encoding         = self.load_encoding("../Think/Memory/pics/amorinha/nenem_16.jpeg")
+        self.modi_face_encoding             = self.load_encoding("../Think/Memory/pics/Modi.jpg")
+        self.trump_face_encoding            = self.load_encoding("../Think/Memory/pics/Trump.jpg")
+        self.felps_face_encoding            = self.load_encoding("../Think/Memory/pics/Felps.jpg")
+        self.boechat_face_encoding          = self.load_encoding("../Think/Memory/pics/Boechat.jpg")
+        self.dePauli_face_encoding          = self.load_encoding("../Think/Memory/pics/dePauli.jpg")
+        self.heitorzimGamerBr_face_encoding = self.load_encoding("../Think/Memory/pics/HeitorzimGamerBr.jpeg")
 
-        self.known_face_encodings = [self.amorinha_face_encoding, self.modi_face_encoding, self.trump_face_encoding, self.felps_face_encoding, self.boechat_face_encoding]
-        self.known_face_names = ["Amorinha Vieira", "Narendra Modi", "Donald Trump", "Felps de Pauli", "Ricardo Boechat"]
+        self.known_face_encodings = [self.amorinha_face_encoding, self.modi_face_encoding, self.trump_face_encoding, self.felps_face_encoding, self.boechat_face_encoding, self.dePauli_face_encoding, self.heitorzimGamerBr_face_encoding]
+        self.known_face_names = ["Amorinha Vieira", "Narendra Modi", "Donald Trump", "Felipe de Pauli", "Ricardo Boechat", "Edson de Pauli", "Heitorzim da Massa BR"]
         # Loaded sample images and extracted face encodings
         print("[Auth::Info] Database loaded")
-    
+        
     def load_encoding(self, image_path):
         image = face_recognition.load_image_file(image_path)
-        encoding = face_recognition.face_encodings(image)[0]
-        return encoding
+        encodings = face_recognition.face_encodings(image)
+        if encodings:
+            return encodings[0]
+        else:
+            print(f"No face found in {image_path}.")
+            return None
 
     def annotate_frame(self, frame):
         # Resize frame of video to 1/4 size for faster face detection processing

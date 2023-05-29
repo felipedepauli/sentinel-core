@@ -13,8 +13,8 @@ RUN npm install
 # Copia os arquivos e pastas do seu projeto para o diretório de trabalho (excluindo node_modules)
 COPY . .
 
-# Expõe a porta 8081 para o contêiner
-EXPOSE 8081
+# Expõe a porta 8080 para o contêiner
+EXPOSE 8080
 
 # Executa o comando `node server.js` quando o contêiner inicia
 CMD [ "node", "server.js" ]
