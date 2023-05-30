@@ -1,47 +1,32 @@
 import face_recognition
 import cv2
 import os
+import glob
 
 class Detector:
     def __init__(self):
         # Load sample images and extract face encodings
         print("[Auth::Info] Loading database...")
-        self.amorinha_face_encoding         = self.load_encoding("../Think/Memory/storage/pics/amorinha/nenem_16.jpeg")
-        self.fabricio_face_encoding         = self.load_encoding("../Think/Memory/storage/pics/Fabricio.jpg")
-        self.rafael_face_encoding           = self.load_encoding("../Think/Memory/storage/pics/Rafael.jpg")
-        self.modi_face_encoding             = self.load_encoding("../Think/Memory/storage/pics/Modi.jpg")
-        self.trump_face_encoding            = self.load_encoding("../Think/Memory/storage/pics/Trump.jpg")
-        self.felps_face_encoding            = self.load_encoding("../Think/Memory/storage/pics/Felps.jpg")
-        self.boechat_face_encoding          = self.load_encoding("../Think/Memory/storage/pics/Boechat.jpg")
-        self.dePauli_face_encoding          = self.load_encoding("../Think/Memory/storage/pics/dePauli.jpg")
-        self.heitorzimGamerBr_face_encoding = self.load_encoding("../Think/Memory/storage/pics/HeitorzimGamerBr.jpeg")
+        self.known_face_encodings = []
+        self.known_face_names = []
+        self.known_face_ids = []
 
-        self.known_face_encodings = [
-            self.amorinha_face_encoding,           # 0
-            self.fabricio_face_encoding,           # 1
-            self.rafael_face_encoding,             # 2
-            self.modi_face_encoding,               # 3
-            self.trump_face_encoding,              # 4
-            self.felps_face_encoding,              # 5
-            self.boechat_face_encoding,            # 6
-            self.dePauli_face_encoding,            # 7
-            self.heitorzimGamerBr_face_encoding    # 8
-        ]
+        # Get list of all .jpg files in the specified directory
+        files = glob.glob("../Think/Memory/storage/faces_bd/*.jpg")
+        
+        for file in files:
+            # Extract the id, name and encoding from each file
+            face_id, face_name = os.path.basename(file).split('__')
+            face_name = face_name.replace('_', ' ').replace('.jpg', '')
+            face_encoding = self.load_encoding(file)
+            
+            if face_encoding is not None:
+                self.known_face_encodings.append(face_encoding)
+                self.known_face_names.append(face_name)
+                self.known_face_ids.append(face_id)
 
-        self.known_face_names = [
-            "Helena Vieira",            # 0
-            "Fabricio Pianovski",       # 1
-            "Rafael Campanhola",        # 2
-            "Narendra Modi",            # 3
-            "Donald Trump",             # 4
-            "Felipe de Pauli",          # 5
-            "Ricardo Boechat",          # 6
-            "Edson de Pauli",           # 7
-            "Heitorzim da Massa BR"     # 8
-        ]
-
-        # Loaded sample images and extracted face encodings
         print("[Auth::Info] Database loaded")
+    
         
     def load_encoding(self, image_path):
         image = face_recognition.load_image_file(image_path)

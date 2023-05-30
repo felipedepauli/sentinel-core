@@ -12,24 +12,22 @@ const CustomModal = ({ isOpen, onClose, onSubmit }) => {
     const [file, setFile] = useState(null);
 
     const handleSubmit = async (values) => {
-        console.log('Received values of form: ', values);
-        const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('age', values.age);
-        formData.append('description', values.description);
-        formData.append('status', values.status);
-        formData.append('photo', values.photo[0].originFileObj);
-        
-        try {
-            const response = await axios.post('http://your-api-url/memory/add', formData);
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
-        }
+      console.log('Received values of form: ', values);
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('age', values.age);
+      formData.append('description', values.description);
+      formData.append('status', values.status);
+      formData.append('photo', values.photo[0].originFileObj);
     
-        onClose(); // Fechar o modal após a submissão
+      try {
+        const response = await axios.post('http://localhost:8081/memory/add', formData);
+      } catch (error) {
+        console.log(error);
+      }
+    
+      onClose(); // Fechar o modal após a submissão
     };
-
     const normFile = (e) => {
         console.log('Upload event:', e);
         if (Array.isArray(e)) {
@@ -39,27 +37,25 @@ const CustomModal = ({ isOpen, onClose, onSubmit }) => {
       };
   
     return (
-        <Modal
-          title="Adicionar Usuário"
-          visible={isOpen}
-          onCancel={onClose}
-          footer={[
-            <Button key="back" onClick={onClose}>
-              Cancelar
-            </Button>,
-            <Button style={{ backgroundColor: '#fffb8f', borderColor: '#262626', color: '#613400' }} key="submit" type="primary" onClick={(event) => {
-                event.preventDefault();
-                onSubmit(event, file);
-            }}>
-              Enviar
-            </Button>,
-          ]}
-        >
-          <Form 
-            name="userForm"
-            layout="vertical"
-            onFinish={handleSubmit}
-          >
+<Modal
+  title="Adicionar Usuário"
+  visible={isOpen}
+  onCancel={onClose}
+  footer={[
+    <Button key="back" onClick={onClose}>
+      Cancelar
+    </Button>,
+    <Button style={{ backgroundColor: '#fffb8f', borderColor: '#262626', color: '#613400' }} key="submit" type="primary" htmlType="submit" form="userForm">
+      Enviar
+    </Button>,
+  ]}
+>
+  <Form 
+    id="userForm"
+    name="userForm"
+    layout="vertical"
+    onFinish={handleSubmit}
+  >
             <Form.Item label="Nome" name="name" rules={[{ required: true, message: 'Por favor, insira o nome.' }]}>
               <Input />
             </Form.Item>

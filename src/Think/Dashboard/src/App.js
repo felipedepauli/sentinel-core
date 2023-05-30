@@ -8,7 +8,6 @@ import CustomModal from './components/Modal.js'
 import './App.css';
 
 const FrameRenderer = () => {
-  console.log("frame renderer")
   const canvasRef = useRef(null);
 
   const drawImage = (base64Data) => {
@@ -32,7 +31,6 @@ const FrameRenderer = () => {
     if (lastMessage) {
       const base64Data = lastMessage.data;
       drawImage(base64Data);
-      console.log(base64Data)
     }
   }, [lastMessage]);
 
