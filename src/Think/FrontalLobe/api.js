@@ -6,7 +6,7 @@ const PersonController = require('./controllers/PersonController');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, 'tmp/fotos/');
+      cb(null, '/app/faces_bd/');
     },
     filename: function(req, file, cb) {
       cb(null, file.originalname);

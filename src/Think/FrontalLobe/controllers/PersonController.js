@@ -29,7 +29,7 @@ const PersonController = {
     });
 
         // Salve a foto no disco
-        const photoPath = path.join('../Memory/storage/pics/', req.file.originalname);
+        const photoPath = path.join('/app/faces_bd/', req.file.originalname);
         fs.rename(req.file.path, photoPath, function(err) {
           if (err) {
             res.status(500).json('Error: ' + err);

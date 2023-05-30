@@ -5,8 +5,10 @@ const WebSocket = require('ws');
 const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require('./api');
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 
 // Configuração da conexão do MongoDB
 const dbAddress = 'mongodb://sentinel_memory:27017/sentinel-eyes';
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use('/', apiRoutes);
 
 console.log(1)
-app.listen(8081, () => console.log(`Listening on port 8081...`));
+app.listen(8081, () => console.log(`API listening on port 8081...`));
 console.log(2)
 
 // Creating HTTP server
@@ -99,5 +101,5 @@ server.on('upgrade', function upgrade(request, socket, head) {
 
 // Start listening on the specified port
 server.listen(8080, () => {
-  console.log('Server listening on http://192.168.137.1:8080');
+  console.log('Streaming listening on http://192.168.137.1:8080');
 });

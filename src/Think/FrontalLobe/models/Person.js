@@ -7,18 +7,19 @@ const PersonSchema = new Schema({
     type: String,
     required: true
   },
-  email: {
+  age: {
     type: String,
     required: true
   },
-  password: {
+  description: {
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
+  status: {
+    type: String,
+    default: 'active'
   }
 });
+
 
 module.exports = Person = mongoose.model('Person', PersonSchema);
