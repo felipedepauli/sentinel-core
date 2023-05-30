@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { Card, Button, Row, Col } from 'antd';
 import CommandButton from './components/CommandButtons.js'
+import CustomModal from './components/Modal.js'
+
 
 import './App.css';
 
@@ -40,6 +42,8 @@ const FrameRenderer = () => {
 const App = () => {
   const [personInfo, setPersonInfo] = useState({ name: 'Nobody', description: '...' });
   const [droneStarted, setDroneStarted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const authenticate = () => {
     setPersonInfo({
@@ -87,11 +91,30 @@ const App = () => {
 			</div>
 
           	<div className='controller__section controller__section--right'>
-					<CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
+                <div>
+                <CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
+                </div>
+                <div>
+                  <div className="disattached">
+                      <Button style={{ backgroundColor: '#fffb8f', borderColor: '#262626', color: '#613400' }} onClick={() => setIsModalOpen(true)}>
+                        Cadastrar
+                      </Button>
+                </div>
+                <CustomModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  onSubmit={(event, file) => {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    formData.append('photo', file);
+                  }}
+                />
+                </div>
           	</div>
             {/* BsPersonBoundingBox */}
             {/* ImTarget */}
 		</div>
+
         
       </div>
   );

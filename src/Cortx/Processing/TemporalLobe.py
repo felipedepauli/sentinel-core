@@ -6,16 +6,40 @@ class Detector:
     def __init__(self):
         # Load sample images and extract face encodings
         print("[Auth::Info] Loading database...")
-        self.amorinha_face_encoding         = self.load_encoding("../Think/Memory/pics/amorinha/nenem_16.jpeg")
-        self.modi_face_encoding             = self.load_encoding("../Think/Memory/pics/Modi.jpg")
-        self.trump_face_encoding            = self.load_encoding("../Think/Memory/pics/Trump.jpg")
-        self.felps_face_encoding            = self.load_encoding("../Think/Memory/pics/Felps.jpg")
-        self.boechat_face_encoding          = self.load_encoding("../Think/Memory/pics/Boechat.jpg")
-        self.dePauli_face_encoding          = self.load_encoding("../Think/Memory/pics/dePauli.jpg")
-        self.heitorzimGamerBr_face_encoding = self.load_encoding("../Think/Memory/pics/HeitorzimGamerBr.jpeg")
+        self.amorinha_face_encoding         = self.load_encoding("../Think/Memory/storage/pics/amorinha/nenem_16.jpeg")
+        self.fabricio_face_encoding         = self.load_encoding("../Think/Memory/storage/pics/Fabricio.jpg")
+        self.rafael_face_encoding           = self.load_encoding("../Think/Memory/storage/pics/Rafael.jpg")
+        self.modi_face_encoding             = self.load_encoding("../Think/Memory/storage/pics/Modi.jpg")
+        self.trump_face_encoding            = self.load_encoding("../Think/Memory/storage/pics/Trump.jpg")
+        self.felps_face_encoding            = self.load_encoding("../Think/Memory/storage/pics/Felps.jpg")
+        self.boechat_face_encoding          = self.load_encoding("../Think/Memory/storage/pics/Boechat.jpg")
+        self.dePauli_face_encoding          = self.load_encoding("../Think/Memory/storage/pics/dePauli.jpg")
+        self.heitorzimGamerBr_face_encoding = self.load_encoding("../Think/Memory/storage/pics/HeitorzimGamerBr.jpeg")
 
-        self.known_face_encodings = [self.amorinha_face_encoding, self.modi_face_encoding, self.trump_face_encoding, self.felps_face_encoding, self.boechat_face_encoding, self.dePauli_face_encoding, self.heitorzimGamerBr_face_encoding]
-        self.known_face_names = ["Amorinha Vieira", "Narendra Modi", "Donald Trump", "Felipe de Pauli", "Ricardo Boechat", "Edson de Pauli", "Heitorzim da Massa BR"]
+        self.known_face_encodings = [
+            self.amorinha_face_encoding,           # 0
+            self.fabricio_face_encoding,           # 1
+            self.rafael_face_encoding,             # 2
+            self.modi_face_encoding,               # 3
+            self.trump_face_encoding,              # 4
+            self.felps_face_encoding,              # 5
+            self.boechat_face_encoding,            # 6
+            self.dePauli_face_encoding,            # 7
+            self.heitorzimGamerBr_face_encoding    # 8
+        ]
+
+        self.known_face_names = [
+            "Helena Vieira",            # 0
+            "Fabricio Pianovski",       # 1
+            "Rafael Campanhola",        # 2
+            "Narendra Modi",            # 3
+            "Donald Trump",             # 4
+            "Felipe de Pauli",          # 5
+            "Ricardo Boechat",          # 6
+            "Edson de Pauli",           # 7
+            "Heitorzim da Massa BR"     # 8
+        ]
+
         # Loaded sample images and extracted face encodings
         print("[Auth::Info] Database loaded")
         

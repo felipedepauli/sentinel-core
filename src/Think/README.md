@@ -2,7 +2,7 @@
 
 ### Para criar os containers FrontalLobe + Memory
 ```bash
-docker compose up -d --build && watch -n0.5
+docker compose up -d --build && watch -n0.5 docker log uf log sentinel_frontal_lobe
 ```
 ```bash
 docker logs sentinel_frontal_lobe

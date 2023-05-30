@@ -1,6 +1,8 @@
 /**
  * @module controllers/PersonController
  */
+const path = require('path');
+const fs = require('fs');
 
 const Person = require('../models/Person');
 
@@ -21,9 +23,18 @@ const PersonController = {
   addPerson: async (req, res) => {
     const newPerson = new Person({
       name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
+      age: req.body.age,
+      description: req.body.description,
+      status: req.body.status
     });
+
+        // Salve a foto no disco
+        const photoPath = path.join('../Memory/storage/pics/', req.file.originalname);
+        fs.rename(req.file.path, photoPath, function(err) {
+          if (err) {
+            res.status(500).json('Error: ' + err);
+          }
+        });
   
     newPerson
       .save() // isso salva a nova pessoa no banco de dados

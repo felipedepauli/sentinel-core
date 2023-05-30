@@ -31,7 +31,7 @@ int Session::process() {
     }
 
     // Step 02. Define the desired frame rate and alculate the frame interval in milliseconds
-    const double frameRate = 8.0; // 4 frames per second
+    const double frameRate = 4.0; // 4 frames per second
     const auto   frameInterval = std::chrono::milliseconds(static_cast<int>(1000.0 / frameRate));
 
     while (true) {
