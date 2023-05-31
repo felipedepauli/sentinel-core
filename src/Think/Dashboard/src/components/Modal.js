@@ -39,7 +39,7 @@ const CustomModal = ({ isOpen, onClose, onSubmit }) => {
     return (
 <Modal
   title="Adicionar Usuário"
-  visible={isOpen}
+  open={isOpen}
   onCancel={onClose}
   footer={[
     <Button key="back" onClick={onClose}>

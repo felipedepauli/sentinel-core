@@ -75,5 +75,17 @@ class Detector:
             if (name == "Unknown Face"):
                 continue
             cv2.putText(frame, name, (left_pos, bottom_pos), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1)
+            
+            
+        # Se houver um arquivo ../../Think/Memory/storage/faces_bd/synapse
+        # enviar o id da pessoa identificada para esse arquivo (é um arquivo FIFO)
+        fifo_path = "../Think/Memory/storage/faces_bd/synapse"
+        if os.path.exists(fifo_path):
+            print("Check person")
+            if True in all_matches:
+                first_match_index = all_matches.index(True)
+                id = self.known_face_ids[first_match_index]
+                with open(fifo_path, 'w') as fifo:
+                    fifo.write(id)
         
         return frame, 10

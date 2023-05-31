@@ -20,7 +20,6 @@ router.post('/memory/add', upload.single('photo'), PersonController.addPerson);
 
 router.get('/memory/get_all_people', PersonController.getAllPeople);
 router.get('/memory/auth', PersonController.authPerson);
-
 router.delete('/memory/forget', PersonController.forgetPerson);
 
 

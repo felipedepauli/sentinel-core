@@ -3,6 +3,9 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { Card, Button, Row, Col } from 'antd';
 import CommandButton from './components/CommandButtons.js'
 import CustomModal from './components/Modal.js'
+import Auth from "./components/Auth.js"
+import PersonInfoCard from './components/PersonInfoCard';
+
 
 
 import './App.css';
@@ -38,18 +41,9 @@ const FrameRenderer = () => {
 };
 
 const App = () => {
-  const [personInfo, setPersonInfo] = useState({ name: 'Nobody', description: '...' });
+  const [personInfo, setPersonInfo] = useState({ name: 'Nobody', age: "", status: "", description: '...' });
   const [droneStarted, setDroneStarted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-
-  const authenticate = () => {
-    setPersonInfo({
-      name: 'Looking For',
-      description: 'Wait authentication...'
-    });
-  
-  }
 
   const toggleDrone = () => {
     setDroneStarted(!droneStarted);
@@ -63,11 +57,9 @@ const App = () => {
 		<div className="program_image">	
 				<FrameRenderer />
 		</div>
-		<div className="program_desc">
-        <Card className="program_desc__block" title={personInfo.name}>
-          <p>{personInfo.description}</p>
-        </Card>
-		</div>
+    <div className="program_desc">
+        <PersonInfoCard personInfo={personInfo} />
+      </div>
 		<div className='program_panel'>
           
         <div className='controller__section controller__section--left'>
@@ -90,7 +82,7 @@ const App = () => {
 
           	<div className='controller__section controller__section--right'>
                 <div>
-                <CommandButton command="auth" text="Authenticate" icon="BsPersonBoundingBox" onClick={authenticate}/>
+                  <Auth setPersonInfo={setPersonInfo} />
                 </div>
                 <div>
                   <div className="disattached">

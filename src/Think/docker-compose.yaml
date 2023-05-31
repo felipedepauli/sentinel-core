@@ -3,6 +3,7 @@ version: '3'
 services:
   app:
     container_name: sentinel_frontal_lobe
+    user: "1000:1000"
     restart: always
     build: 
       context: FrontalLobe

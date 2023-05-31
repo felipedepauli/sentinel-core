@@ -5,6 +5,10 @@ const path = require('path');
 const fs = require('fs');
 const WebSocket = require('ws')
 const Person = require('../models/Person');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+const FIFO_PATH = '/app/faces_bd/synapse';
 
 /**
  * A controller for handling requests related to Person.
@@ -79,33 +83,46 @@ const PersonController = {
    * @returns {object} - A success message if successful, or an error message if unsuccessful.
    */
   authPerson: async (req, res) => {
-    console.log("Time to authenticate!")
+    console.log("Time to authenticate!");
   
-    // Cria um WebSocket para se conectar ao Python
-    const ws = new WebSocket('ws://localhost:8081/auth');
-  
-    // Quando o WebSocket é aberto, envia o id da pessoa
-    ws.on('open', function open() {
-      ws.send(JSON.stringify({ id: req.body.id }));
-    });
-  
-    // Quando uma mensagem é recebida do WebSocket
-    ws.on('message', async function incoming(data) {
-      try {
-        // O id da pessoa é recebido do Python
-        const personId = JSON.parse(data).id;
-  
-        const person = await Person.findOne({ _id: personId });
-  
-        if (!person) {
-          return res.status(404).json({ message: "No person found with this ID" });
-        }
-  
-        res.json(person);
-      } catch (err) {
-        res.status(500).json({ message: err.message });
+    try {
+      // Verifica se o arquivo fifo existe
+      if (!fs.existsSync(FIFO_PATH)) {
+        // Se não existir, cria o arquivo fifo usando mkfifo
+        await exec(`mkfifo ${FIFO_PATH}`);
       }
-    });
+  
+      // Ler o arquivo FIFO
+      const fifoReadStream = fs.createReadStream(FIFO_PATH);
+  
+      let data = '';
+      for await (const chunk of fifoReadStream) {
+        data += chunk;
+      }
+  
+      // Fecha o arquivo FIFO
+      fifoReadStream.close();
+  
+      console.log(data)
+  
+      // Exclui o arquivo FIFO
+      fs.unlinkSync(FIFO_PATH);
+  
+      // Solicitar ao banco de dados o objeto referente ao id
+      const person = await Person.findById(data);
+  
+      if (!person) {
+        console.error(`Person not found for id: ${data}`);
+        return res.status(404).json({ error: 'Person not found' });
+      }
+  
+      // Retorna para o frontend o objeto {"id": objeto_do_mongodb}
+      res.json({ "id": person });
+  
+    } catch (error) {
+      console.error(`Error during authentication: ${error}`);
+      res.status(500).json({ error: 'Error during authentication' });
+    }
   },
   
 
