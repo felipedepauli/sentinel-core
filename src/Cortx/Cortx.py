@@ -4,7 +4,7 @@ import struct
 import cv2
 import websockets
 import numpy as np
-from Processing.TemporalLobe import Detector
+# from Processing.TemporalLobe import Detector
 from cv2 import imencode
 import json
 import base64
