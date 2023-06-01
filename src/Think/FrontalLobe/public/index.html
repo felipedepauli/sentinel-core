@@ -6,23 +6,6 @@
   <title>Video WebSocket Example</title>
 </head>
 <body>
-  oioi
-  <video id="video" controls autoplay></video>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const video = document.getElementById('video');
-    const socket = io();
-
-    socket.on('message', (message) => {
-      console.log(`Received message: ${message}`);
-    });
-
-    // Simulating video source
-    fetch('https://www.w3schools.com/html/movie.mp4')
-      .then(response => response.blob())
-      .then(blob => {
-        video.src = URL.createObjectURL(blob);
-      });
-  </script>
+    
 </body>
 </html>

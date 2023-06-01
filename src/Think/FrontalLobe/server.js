@@ -10,6 +10,8 @@ const cors = require('cors')
 // Setting up express app and enabling CORS
 const app = express()
 app.use(cors())
+app.use(express.static("public"))
+app.use(express.static("../../../../media"))
 
 // MongoDB connection configuration
 const dbAddress = 'mongodb://sentinel_memory:27017/sentinel-eyes';
