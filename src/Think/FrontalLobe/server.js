@@ -7,22 +7,26 @@ const mongoose = require('mongoose');
 const apiRoutes = require('./api');
 const cors = require('cors')
 
+// Setting up express app and enabling CORS
 const app = express()
 app.use(cors())
+app.use(express.static("public"))
+app.use(express.static("../../../../media"))
 
-// Configuração da conexão do MongoDB
+// MongoDB connection configuration
 const dbAddress = 'mongodb://sentinel_memory:27017/sentinel-eyes';
 
+// Connecting to MongoDB
 mongoose.connect(dbAddress, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+// Setting up express to use JSON and API routes
 app.use(express.json());
 app.use('/', apiRoutes);
 
-console.log(1)
+// Starting API server
 app.listen(8081, () => console.log(`API listening on port 8081...`));
-console.log(2)
 
 // Creating HTTP server
 const server = http.createServer();
@@ -62,17 +66,14 @@ wssPython.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     const data = JSON.parse(message);
-    // Decodifica a imagem
+    // Decoding the image
     const imgBuffer = Buffer.from(data.frame, 'base64');
-    // Envie a imagem como uma string base64 para o cliente web
+    // Send the image as a base64 string to the web client
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
       webSocket.send(imgBuffer.toString('base64'));
     }
-    // console.log(imgBuffer.slice(0, 10).toString('hex'))
   });
   
-  
-
   // ON CLOSE Event
   // This event triggers when the Python client disconnects from the server
   ws.on('close', () => {

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['colors_0',['colors',['../classDetector.html#aee9283d38c6551947287443892420bfb',1,'Detector']]],
-  ['connection_1',['connection',['../classCortx.html#a7b256218c319b0db2b1487f878d744d7',1,'Cortx']]],
-  ['cortx_2',['Cortx',['../classCortx.html',1,'Cortx'],['../classCortx.html#af0370aa25939a79da02acbba0bdcfef5',1,'Cortx::Cortx()']]],
-  ['cortx_2ecpp_3',['Cortx.cpp',['../Cortx_8cpp.html',1,'']]],
-  ['cortx_2ehpp_4',['Cortx.hpp',['../Cortx_8hpp.html',1,'']]]
+  ['detector_0',['detector',['../classCortx.html#a2b13b6fa60a567cf559fad06a516b45f',1,'Cortx']]],
+  ['detector_5f_1',['detector_',['../classCortx.html#a7139b9486ae35f41e156a428d09ef812',1,'Cortx']]],
+  ['do_5faccept_2',['do_accept',['../classEys.html#a5e831433449367bf39321fe0e492fa07',1,'Eys']]]
 ];

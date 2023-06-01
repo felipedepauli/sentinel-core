@@ -13,6 +13,11 @@
   }
 }
 
+.program_logo {
+  position: absolute;
+  left: 10px;
+  top: 0px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

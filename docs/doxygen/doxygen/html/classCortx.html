@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('classCortx.html',''); initResizable();
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classCortx-members.html">List of all members</a>  </div>
@@ -114,6 +115,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:acc68dca44493297afadfb4829658fcd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main method of the <a class="el" href="classCortx.html" title="This class provides the main functionality of the Cortex program.">Cortx</a> class. It starts the network connection and runs the detector.  <br /></td></tr>
 <tr class="separator:acc68dca44493297afadfb4829658fcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2e70d58c98a82e9bdf507bbde7ac5e26"><td class="memItemLeft" align="right" valign="top">sys&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a2e70d58c98a82e9bdf507bbde7ac5e26">argumento</a> = sys.argv[1]</td></tr>
+<tr class="separator:a2e70d58c98a82e9bdf507bbde7ac5e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea2865c270530ba810d63406aaeb07c"><td class="memItemLeft" align="right" valign="top">socket&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a2ea2865c270530ba810d63406aaeb07c">s</a> = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</td></tr>
+<tr class="separator:a2ea2865c270530ba810d63406aaeb07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b13b6fa60a567cf559fad06a516b45f"><td class="memItemLeft" align="right" valign="top">Detector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a2b13b6fa60a567cf559fad06a516b45f">detector</a> = Detector()</td></tr>
+<tr class="separator:a2b13b6fa60a567cf559fad06a516b45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a7b256218c319b0db2b1487f878d744d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a7b256218c319b0db2b1487f878d744d7">connection</a> (tcp::socket &amp;socket)</td></tr>
@@ -128,8 +138,8 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a3a8e937552b611196c267c0a32d1a622"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a3a8e937552b611196c267c0a32d1a622">port_</a></td></tr>
 <tr class="memdesc:a3a8e937552b611196c267c0a32d1a622"><td class="mdescLeft">&#160;</td><td class="mdescRight">The port number of the server.  <br /></td></tr>
 <tr class="separator:a3a8e937552b611196c267c0a32d1a622"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7139b9486ae35f41e156a428d09ef812"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDetector.html">Detector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a7139b9486ae35f41e156a428d09ef812">detector_</a></td></tr>
-<tr class="memdesc:a7139b9486ae35f41e156a428d09ef812"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classDetector.html" title="This class is responsible for object detection in the input frames.">Detector</a> object, which handles the detection functionality.  <br /></td></tr>
+<tr class="memitem:a7139b9486ae35f41e156a428d09ef812"><td class="memItemLeft" align="right" valign="top">Detector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCortx.html#a7139b9486ae35f41e156a428d09ef812">detector_</a></td></tr>
+<tr class="memdesc:a7139b9486ae35f41e156a428d09ef812"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Detector object, which handles the detection functionality.  <br /></td></tr>
 <tr class="separator:a7139b9486ae35f41e156a428d09ef812"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -228,6 +238,34 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2e70d58c98a82e9bdf507bbde7ac5e26" name="a2e70d58c98a82e9bdf507bbde7ac5e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e70d58c98a82e9bdf507bbde7ac5e26">&#9670;&#160;</a></span>argumento</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sys Cortx.argumento = sys.argv[1]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b13b6fa60a567cf559fad06a516b45f" name="a2b13b6fa60a567cf559fad06a516b45f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b13b6fa60a567cf559fad06a516b45f">&#9670;&#160;</a></span>detector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Detector Cortx.detector = Detector()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7139b9486ae35f41e156a428d09ef812" name="a7139b9486ae35f41e156a428d09ef812"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7139b9486ae35f41e156a428d09ef812">&#9670;&#160;</a></span>detector_</h2>
 
@@ -238,7 +276,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classDetector.html">Detector</a> Cortx::detector_</td>
+          <td class="memname">Detector Cortx::detector_</td>
         </tr>
       </table>
   </td>
@@ -248,7 +286,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The <a class="el" href="classDetector.html" title="This class is responsible for object detection in the input frames.">Detector</a> object, which handles the detection functionality. </p>
+<p>The Detector object, which handles the detection functionality. </p>
 
 </div>
 </div>
@@ -300,9 +338,24 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2ea2865c270530ba810d63406aaeb07c" name="a2ea2865c270530ba810d63406aaeb07c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea2865c270530ba810d63406aaeb07c">&#9670;&#160;</a></span>s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">socket Cortx.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>codes/Cortx/<a class="el" href="Cortx_8hpp_source.html">Cortx.hpp</a></li>
-<li>codes/Cortx/<a class="el" href="Cortx_8cpp.html">Cortx.cpp</a></li>
+<li>src/Cortx/<a class="el" href="Cortx_8hpp_source.html">Cortx.hpp</a></li>
+<li>src/Cortx/<a class="el" href="Cortx_8py.html">Cortx.py</a></li>
+<li>src/Cortx/<a class="el" href="Cortx_8cpp.html">Cortx.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

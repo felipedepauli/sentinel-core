@@ -29,7 +29,9 @@ class Detector:
     
         
     def load_encoding(self, image_path):
+        # Load image file
         image = face_recognition.load_image_file(image_path)
+        # Extract face encodings
         encodings = face_recognition.face_encodings(image)
         if encodings:
             return encodings[0]
@@ -48,12 +50,13 @@ class Detector:
         for current_face_location, current_face_encoding in zip(all_face_locations, all_face_encodings):
             # Splitting the tuple to get the four position values of current face
             top_pos, right_pos, bottom_pos, left_pos = current_face_location
-            top_pos *= 4
-            right_pos *= 4
-            bottom_pos *= 4
-            left_pos *= 4
+            top_pos     *= 4
+            right_pos   *= 4
+            bottom_pos  *= 4
+            left_pos    *= 4
         
             # Compare faces and get the matches list
+            # Here is where the things happen!
             all_matches = face_recognition.compare_faces(self.known_face_encodings, current_face_encoding)
 
             # Initialize a name string as unknown face
@@ -74,6 +77,10 @@ class Detector:
             font = cv2.FONT_HERSHEY_DUPLEX
             if (name == "Unknown Face"):
                 continue
+            # Write name below each face
+            font = cv2.FONT_HERSHEY_DUPLEX
+            if (name == "Unknown Face"):
+                continue
             cv2.putText(frame, name, (left_pos, bottom_pos), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1)
             
             
@@ -88,4 +95,4 @@ class Detector:
                 with open(fifo_path, 'w') as fifo:
                     fifo.write(id)
         
-        return frame, 10
+        return frame

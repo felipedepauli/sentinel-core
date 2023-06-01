@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['detector_0',['Detector',['../classDetector.html',1,'Detector'],['../classDetector.html#ad1d082fc2cb4855fa9e07253267025c1',1,'Detector::Detector()']]],
-  ['detector_2ecpp_1',['Detector.cpp',['../Detector_8cpp.html',1,'']]],
-  ['detector_2ehpp_2',['Detector.hpp',['../Detector_8hpp.html',1,'']]],
-  ['detector_5f_3',['detector_',['../classCortx.html#a7139b9486ae35f41e156a428d09ef812',1,'Cortx']]],
-  ['do_5faccept_4',['do_accept',['../classEys.html#a5e831433449367bf39321fe0e492fa07',1,'Eys']]]
+  ['evileys_5f_0',['evilEys_',['../classSession.html#a6531574bee77a8bf2bd547c1ec5e8065',1,'Session']]],
+  ['expected_5fheader_1',['expected_header',['../Session_8cpp.html#ab3a6632d995fd41d4d5e143aa2098e54',1,'Session.cpp']]],
+  ['eys_2',['Eys',['../classEys.html',1,'Eys'],['../classEys.html#aa000c9e1fa94ba38ca460164fb1bcbbf',1,'Eys::Eys()']]],
+  ['eys_2ecpp_3',['Eys.cpp',['../Eys_8cpp.html',1,'']]],
+  ['eys_2ehpp_4',['Eys.hpp',['../Eys_8hpp.html',1,'']]]
 ];

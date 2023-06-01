@@ -1,25 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { Card, Button, Row, Col } from 'antd';
+import { Button, Image } from 'antd';
 import CommandButton from './components/CommandButtons.js'
 import CustomModal from './components/Modal.js'
 import Auth from "./components/Auth.js"
 import PersonInfoCard from './components/PersonInfoCard';
 
-
-
+// Importing css style
 import './App.css';
 
+// This component is responsible for rendering the frames received via WebSocket
 const FrameRenderer = () => {
+  // Create a ref to access the canvas
   const canvasRef = useRef(null);
 
+  // Function to draw an image on the canvas from base64 data
   const drawImage = (base64Data) => {
     const img = new Image();
     img.src = `data:image/jpeg;base64,${base64Data}`;
     img.onload = () => {
       if (canvasRef.current) {
         const ctx = canvasRef.current.getContext('2d');
-        // Ajusta a largura e a altura do canvas para corresponder à da imagem
+        // Adjust canvas width and height to match the image
         canvasRef.current.width = img.width;
         canvasRef.current.height = img.height;
         ctx.drawImage(img, 0, 0, img.width, img.height);
@@ -27,9 +29,11 @@ const FrameRenderer = () => {
     };
   };
 
+  // WebSocket URL
   const socketUrl = 'ws://localhost:8080/web';
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
+  // Effect to draw image whenever a new message arrives
   useEffect(() => {
     if (lastMessage) {
       const base64Data = lastMessage.data;
@@ -40,11 +44,14 @@ const FrameRenderer = () => {
   return <canvas ref={canvasRef} style={{ width: 640, height: 480 }} />;
 };
 
+// Main application component
 const App = () => {
+  // Create states for the person info, drone status and modal visibility
   const [personInfo, setPersonInfo] = useState({ name: 'Nobody', age: "", status: "", description: '...' });
   const [droneStarted, setDroneStarted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to toggle the drone status
   const toggleDrone = () => {
     setDroneStarted(!droneStarted);
   }
@@ -52,6 +59,13 @@ const App = () => {
   return (
     <div className="main">
 		<div className="program_name">
+      <div className='program_logo'>
+        <Image
+          width={230}
+          src="/Logo_.png"
+          />
+      </div>
+
       		<h1>Sentinel Eyes</h1>
 		</div>
 		<div className="program_image">	

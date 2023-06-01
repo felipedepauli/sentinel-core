@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['labels_0',['labels',['../classDetector.html#a145235b570c6bba35ae82328378fa2fe',1,'Detector']]]
+  ['openeyes_0',['openEyes',['../classEys.html#aab4c7ef002911be1ee543c640d492add',1,'Eys']]]
 ];

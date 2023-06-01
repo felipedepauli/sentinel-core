@@ -30,7 +30,6 @@ const AuthButton = ({ setPersonInfo }) => {
 
   return (
     <Button icon={<BsPersonBoundingBox />} onClick={authenticate}>
-      Authenticate
     </Button>
   )
 };

@@ -16,6 +16,15 @@ This class provides the main functionality of the Cortex program.
 \begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classCortx}{Cortx}} class. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCortx_acc68dca44493297afadfb4829658fcd4}{run}} ()
 \begin{DoxyCompactList}\small\item\em Main method of the \mbox{\hyperlink{classCortx}{Cortx}} class. It starts the network connection and runs the detector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sys \mbox{\hyperlink{classCortx_a2e70d58c98a82e9bdf507bbde7ac5e26}{argumento}} = sys.\+argv\mbox{[}1\mbox{]}
+\item 
+socket \mbox{\hyperlink{classCortx_a2ea2865c270530ba810d63406aaeb07c}{s}} = socket.\+socket(socket.\+AF\+\_\+\+INET, socket.\+SOCK\+\_\+\+STREAM)
+\item 
+Detector \mbox{\hyperlink{classCortx_a2b13b6fa60a567cf559fad06a516b45f}{detector}} = Detector()
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,8 +37,8 @@ const std\+::string \mbox{\hyperlink{classCortx_acb30d20c6eabe82f7a647b1c410f82d
 \begin{DoxyCompactList}\small\item\em The IP address of the server. \end{DoxyCompactList}\item 
 unsigned short \mbox{\hyperlink{classCortx_a3a8e937552b611196c267c0a32d1a622}{port\+\_\+}}
 \begin{DoxyCompactList}\small\item\em The port number of the server. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classDetector}{Detector}} \mbox{\hyperlink{classCortx_a7139b9486ae35f41e156a428d09ef812}{detector\+\_\+}}
-\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classDetector}{Detector}} object, which handles the detection functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+Detector \mbox{\hyperlink{classCortx_a7139b9486ae35f41e156a428d09ef812}{detector\+\_\+}}
+\begin{DoxyCompactList}\small\item\em The Detector object, which handles the detection functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -86,15 +95,27 @@ Main method of the \mbox{\hyperlink{classCortx}{Cortx}} class. It starts the net
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCortx_a2e70d58c98a82e9bdf507bbde7ac5e26}\label{classCortx_a2e70d58c98a82e9bdf507bbde7ac5e26}} 
+\index{Cortx@{Cortx}!argumento@{argumento}}
+\index{argumento@{argumento}!Cortx@{Cortx}}
+\doxysubsubsection{\texorpdfstring{argumento}{argumento}}
+{\footnotesize\ttfamily sys Cortx.\+argumento = sys.\+argv\mbox{[}1\mbox{]}}
+
+\mbox{\Hypertarget{classCortx_a2b13b6fa60a567cf559fad06a516b45f}\label{classCortx_a2b13b6fa60a567cf559fad06a516b45f}} 
+\index{Cortx@{Cortx}!detector@{detector}}
+\index{detector@{detector}!Cortx@{Cortx}}
+\doxysubsubsection{\texorpdfstring{detector}{detector}}
+{\footnotesize\ttfamily Detector Cortx.\+detector = Detector()}
+
 \mbox{\Hypertarget{classCortx_a7139b9486ae35f41e156a428d09ef812}\label{classCortx_a7139b9486ae35f41e156a428d09ef812}} 
 \index{Cortx@{Cortx}!detector\_@{detector\_}}
 \index{detector\_@{detector\_}!Cortx@{Cortx}}
 \doxysubsubsection{\texorpdfstring{detector\_}{detector\_}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classDetector}{Detector}} Cortx\+::detector\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Detector Cortx\+::detector\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-The \mbox{\hyperlink{classDetector}{Detector}} object, which handles the detection functionality. 
+The Detector object, which handles the detection functionality. 
 
 \mbox{\Hypertarget{classCortx_acb30d20c6eabe82f7a647b1c410f82d4}\label{classCortx_acb30d20c6eabe82f7a647b1c410f82d4}} 
 \index{Cortx@{Cortx}!host\_@{host\_}}
@@ -116,9 +137,16 @@ The IP address of the server.
 
 The port number of the server. 
 
+\mbox{\Hypertarget{classCortx_a2ea2865c270530ba810d63406aaeb07c}\label{classCortx_a2ea2865c270530ba810d63406aaeb07c}} 
+\index{Cortx@{Cortx}!s@{s}}
+\index{s@{s}!Cortx@{Cortx}}
+\doxysubsubsection{\texorpdfstring{s}{s}}
+{\footnotesize\ttfamily socket Cortx.\+s = socket.\+socket(socket.\+AF\+\_\+\+INET, socket.\+SOCK\+\_\+\+STREAM)}
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-codes/\+Cortx/\mbox{\hyperlink{Cortx_8hpp}{Cortx.\+hpp}}\item 
-codes/\+Cortx/\mbox{\hyperlink{Cortx_8cpp}{Cortx.\+cpp}}\end{DoxyCompactItemize}
+src/\+Cortx/\mbox{\hyperlink{Cortx_8hpp}{Cortx.\+hpp}}\item 
+src/\+Cortx/\mbox{\hyperlink{Cortx_8py}{Cortx.\+py}}\item 
+src/\+Cortx/\mbox{\hyperlink{Cortx_8cpp}{Cortx.\+cpp}}\end{DoxyCompactItemize}

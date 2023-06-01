@@ -3,29 +3,13 @@
  * @brief  The Cortx's Main File.
  * @details This is the main entry point of the Cortex program. It processes the command line arguments, 
  *          sets up signal handling, and runs the Cortex class. The Cortex class is responsible for the main logic of the program.
- *
- * Created by:
- *   - Felipe Camargo de Pauli
- *   - fcdpauli@gmail.com
- *   - 2023-04-15
- *
- * This file is part of the Cortex project:
- *   - Website: http://www.aincrivelfabrica.com.br
- *   - GitHub: https://github.com/felipedepauli/evil-eyes
- *
- * License:
- *     Copyright (C) 2023 Felipe Camargo de Pauli
- *     All Rights Reserved.
- *
- *     This source code is provided for viewing purposes only. No part of this source code
- *     may be used, modified, distributed, or sublicensed for any purpose without the
- *     express written consent of the copyright holder.
  */
 
-#include <iostream>     // std::cerr
-#include "Cortx.hpp"    // Cortx
-#include <csignal>      // Linux signals handler
+#include <iostream>     // For standard I/O operations
+#include "Cortx.hpp"    // Include the Cortx class
+#include <csignal>      // For handling Linux signals
 
+// Function to handle the SIGINT signal (Ctrl+C)
 void handleSignal(int signal) {
     if (signal == SIGINT) {
         std::cout << " The Cortex Program was -> "  << signal << std::endl;
@@ -43,23 +27,23 @@ void handleSignal(int signal) {
  */
 int main(int argc, char* argv[]) {
 
-    // 01. Verify if the two arguments were passed: IP and Port.
+    // Check if the correct number of command-line arguments were passed
     if (argc != 3) {
         std::cerr << "Usage: client <ip> <port>\n";
         return 1;
     }
 
-    // 02. Get the IP and Port.
+    // Get the IP and port from the command-line arguments
     std::string ip = argv[1];
     unsigned short port = std::atoi(argv[2]);
 
-    // 03. Get the responsability to handle the system signals.
+    // Set up the signal handler for SIGINT
     signal(SIGINT, handleSignal);
 
-    // 04. Instantiate the class Cortx.
+    // Instantiate the Cortx class
     Cortx cortex(ip, port);
 
-    // 05. Run the class Cortx and keep the program running.
+    // Run the main loop of the Cortx class
     cortex.run();
 
     return 0;

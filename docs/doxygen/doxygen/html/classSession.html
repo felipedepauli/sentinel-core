@@ -100,6 +100,9 @@ $(document).ready(function(){initNavTree('classSession.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a session between the server and a client.  
+ <a href="classSession.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Session_8hpp_source.html">Session.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Session:</div>
@@ -111,31 +114,36 @@ Inheritance diagram for Session:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a88d71461f1203f0ae3d1eece46c9466c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a88d71461f1203f0ae3d1eece46c9466c">Session</a> (boost::asio::ip::tcp::socket socket)</td></tr>
+<tr class="memdesc:a88d71461f1203f0ae3d1eece46c9466c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classSession.html" title="Represents a session between the server and a client.">Session</a> class.  <br /></td></tr>
 <tr class="separator:a88d71461f1203f0ae3d1eece46c9466c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8753bb9dee966b7d39abc9b7237cd665"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a8753bb9dee966b7d39abc9b7237cd665">~Session</a> ()</td></tr>
+<tr class="memdesc:a8753bb9dee966b7d39abc9b7237cd665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classSession.html" title="Represents a session between the server and a client.">Session</a> class.  <br /></td></tr>
 <tr class="separator:a8753bb9dee966b7d39abc9b7237cd665"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47baf956cead0046fcbac45c572c70d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a47baf956cead0046fcbac45c572c70d3">start</a> ()</td></tr>
+<tr class="memdesc:a47baf956cead0046fcbac45c572c70d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the session.  <br /></td></tr>
 <tr class="separator:a47baf956cead0046fcbac45c572c70d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a1c0c3832102b76bea6bfafe1315b4b92"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a1c0c3832102b76bea6bfafe1315b4b92">openCamera</a> (cv::VideoCapture &amp;cap)</td></tr>
-<tr class="separator:a1c0c3832102b76bea6bfafe1315b4b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e19f9a1709a41de88aea2b39d28ee69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a5e19f9a1709a41de88aea2b39d28ee69">send_header</a> ()</td></tr>
-<tr class="separator:a5e19f9a1709a41de88aea2b39d28ee69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2d2500e4c6d0fc102373b6009f7677"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a8d2d2500e4c6d0fc102373b6009f7677">send_frame</a> (const cv::Mat &amp;frame)</td></tr>
+<tr class="memdesc:a8d2d2500e4c6d0fc102373b6009f7677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a frame to the client.  <br /></td></tr>
 <tr class="separator:a8d2d2500e4c6d0fc102373b6009f7677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a7192e6e9a4b0cccacdae1c39fa098"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a73a7192e6e9a4b0cccacdae1c39fa098">process</a> ()</td></tr>
+<tr class="memdesc:a73a7192e6e9a4b0cccacdae1c39fa098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the client's requests.  <br /></td></tr>
 <tr class="separator:a73a7192e6e9a4b0cccacdae1c39fa098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a6531574bee77a8bf2bd547c1ec5e8065"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEys.html">Eys</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a6531574bee77a8bf2bd547c1ec5e8065">evilEys_</a></td></tr>
+<tr class="separator:a6531574bee77a8bf2bd547c1ec5e8065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa3ca1f897b73d5a80e178ae1bf06cb2"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::tcp::socket&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#aaa3ca1f897b73d5a80e178ae1bf06cb2">socket_</a></td></tr>
 <tr class="separator:aaa3ca1f897b73d5a80e178ae1bf06cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a641cf5b20680d6a8c2977735e29ebdbf"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSession.html#a641cf5b20680d6a8c2977735e29ebdbf">received_header</a></td></tr>
 <tr class="separator:a641cf5b20680d6a8c2977735e29ebdbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a session between the server and a client. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a88d71461f1203f0ae3d1eece46c9466c" name="a88d71461f1203f0ae3d1eece46c9466c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88d71461f1203f0ae3d1eece46c9466c">&#9670;&#160;</a></span>Session()</h2>
 
@@ -151,6 +159,14 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructor for the <a class="el" href="classSession.html" title="Represents a session between the server and a client.">Session</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">socket</td><td>The socket representing the client connection. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -169,35 +185,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Destructor for the <a class="el" href="classSession.html" title="Represents a session between the server and a client.">Session</a> class. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1c0c3832102b76bea6bfafe1315b4b92" name="a1c0c3832102b76bea6bfafe1315b4b92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c0c3832102b76bea6bfafe1315b4b92">&#9670;&#160;</a></span>openCamera()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Session::openCamera </td>
-          <td>(</td>
-          <td class="paramtype">cv::VideoCapture &amp;&#160;</td>
-          <td class="paramname"><em>cap</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a73a7192e6e9a4b0cccacdae1c39fa098" name="a73a7192e6e9a4b0cccacdae1c39fa098"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a73a7192e6e9a4b0cccacdae1c39fa098">&#9670;&#160;</a></span>process()</h2>
 
@@ -220,6 +212,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Processes the client's requests. </p>
+<dl class="section return"><dt>Returns</dt><dd>The status of the process. </dd></dl>
 
 </div>
 </div>
@@ -247,30 +242,13 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a5e19f9a1709a41de88aea2b39d28ee69" name="a5e19f9a1709a41de88aea2b39d28ee69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e19f9a1709a41de88aea2b39d28ee69">&#9670;&#160;</a></span>send_header()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Session::send_header </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Sends a frame to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame</td><td>The frame to be sent. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -289,9 +267,33 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Starts the session. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6531574bee77a8bf2bd547c1ec5e8065" name="a6531574bee77a8bf2bd547c1ec5e8065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6531574bee77a8bf2bd547c1ec5e8065">&#9670;&#160;</a></span>evilEys_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEys.html">Eys</a> Session::evilEys_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a641cf5b20680d6a8c2977735e29ebdbf" name="a641cf5b20680d6a8c2977735e29ebdbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a641cf5b20680d6a8c2977735e29ebdbf">&#9670;&#160;</a></span>received_header</h2>
 
@@ -311,6 +313,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The received header from the client. </p>
 
 </div>
 </div>
@@ -333,12 +336,13 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The socket representing the client connection. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>codes/Eys/<a class="el" href="Session_8hpp_source.html">Session.hpp</a></li>
-<li>codes/Eys/<a class="el" href="Session_8cpp.html">Session.cpp</a></li>
+<li>src/Eys/<a class="el" href="Session_8hpp_source.html">Session.hpp</a></li>
+<li>src/Eys/<a class="el" href="Session_8cpp.html">Session.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,3 +1,4 @@
+// WakeUP.hpp
 /**
  * @file   WakeUP.hpp
  * @brief  The WakeUP Server Header File.
@@ -32,6 +33,9 @@ using boost::asio::ip::tcp;
 /**
  * @class WakeUP
  * @brief Handle new connections.
+ * 
+ * This class is responsible for managing the server connections. It starts the server on the specified port and begins listening for new connections.
+ * When a new connection is accepted, a new session is created to handle the client-server interaction. Each session is run in its own thread to allow for multiple simultaneous connections.
  */ 
 class WakeUP {
 public:
