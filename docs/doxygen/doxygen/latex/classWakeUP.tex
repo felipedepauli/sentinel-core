@@ -27,13 +27,15 @@ void \mbox{\hyperlink{classWakeUP_a747c228c0f66a78e7bfbd8032ecd20d8}{listening}}
 boost\+::asio\+::io\+\_\+context \mbox{\hyperlink{classWakeUP_a30d497901d6d1081baf8277f012a2695}{io\+\_\+context\+\_\+}}
 \item 
 tcp\+::acceptor \mbox{\hyperlink{classWakeUP_ab61b563f8765f5733b47b89bbb45a631}{acceptor\+\_\+}}
-\item 
+\begin{DoxyCompactList}\small\item\em Keeps the context of boost. It has the context and the object used to accept new connections. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ std\+::thread $>$ $>$ \mbox{\hyperlink{classWakeUP_adffcf31f8da4bb7f6c07373cdc089855}{session\+\_\+threads\+\_\+}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Object to accept new connections. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Handle new connections. 
+
+This class is responsible for managing the server connections. It starts the server on the specified port and begins listening for new connections. When a new connection is accepted, a new session is created to handle the client-\/server interaction. Each session is run in its own thread to allow for multiple simultaneous connections. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classWakeUP_acfad5351160daa2aee18ab2cde262a2d}\label{classWakeUP_acfad5351160daa2aee18ab2cde262a2d}} 
@@ -74,7 +76,7 @@ Starts an asynchronous operation to accept a new connection.
 
 Runs the server, starting the event loop for incoming connections. 
 
-/$\ast$$\ast$ 
+
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classWakeUP_ab61b563f8765f5733b47b89bbb45a631}\label{classWakeUP_ab61b563f8765f5733b47b89bbb45a631}} 
@@ -82,6 +84,10 @@ Runs the server, starting the event loop for incoming connections.
 \index{acceptor\_@{acceptor\_}!WakeUP@{WakeUP}}
 \doxysubsubsection{\texorpdfstring{acceptor\_}{acceptor\_}}
 {\footnotesize\ttfamily tcp\+::acceptor Wake\+UP\+::acceptor\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Keeps the context of boost. It has the context and the object used to accept new connections. 
 
 \mbox{\Hypertarget{classWakeUP_a30d497901d6d1081baf8277f012a2695}\label{classWakeUP_a30d497901d6d1081baf8277f012a2695}} 
 \index{WakeUP@{WakeUP}!io\_context\_@{io\_context\_}}
@@ -94,6 +100,10 @@ Runs the server, starting the event loop for incoming connections.
 \index{session\_threads\_@{session\_threads\_}!WakeUP@{WakeUP}}
 \doxysubsubsection{\texorpdfstring{session\_threads\_}{session\_threads\_}}
 {\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$std\+::thread$>$ $>$ Wake\+UP\+::session\+\_\+threads\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Object to accept new connections. 
 
 
 

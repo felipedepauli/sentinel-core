@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['detector_0',['Detector',['../classDetector.html',1,'']]]
+  ['eys_0',['Eys',['../classEys.html',1,'']]]
 ];

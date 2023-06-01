@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['annotate_5fframe_0',['annotate_frame',['../classDetector.html#a38414f85898e4188c7d85e1657413469',1,'Detector']]]
+  ['async_5faccept_0',['async_accept',['../WakeUP_8hpp.html#aab07c5cc103e2bf3b1169c7d4b365776',1,'WakeUP.hpp']]]
 ];

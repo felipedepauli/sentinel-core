@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../Cortx_2main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../Eys_2main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../Cortx_2main_8cpp.html',1,'(Global Namespace)'],['../Eys_2main_8cpp.html',1,'(Global Namespace)']]],
-  ['main_5fpage_2edoxy_2',['main_page.doxy',['../main__page_8doxy.html',1,'']]]
+  ['port_5f_0',['port_',['../classCortx.html#a3a8e937552b611196c267c0a32d1a622',1,'Cortx']]],
+  ['process_1',['process',['../classSession.html#a73a7192e6e9a4b0cccacdae1c39fa098',1,'Session']]]
 ];

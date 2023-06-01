@@ -1,25 +1,45 @@
+/**
+ * @file   Eys.hpp
+ * @brief  The Eys Server Header File.
+ *
+ * This file is part of the Evil Eyes project:
+ *   - Website: http://www.aincrivelfabrica.com.br
+ *   - GitHub: https://github.com/felipedepauli/evil-eyes
+ *
+ * License:
+ *     Copyright (C) 2023 Felipe Camargo de Pauli
+ *     All Rights Reserved.
+ *
+ *     This source code is provided for viewing purposes only. No part of this source code
+ *     may be used, modified, distributed, or sublicensed for any purpose without the
+ *     express written consent of the copyright holder.
+ */
+
 #include "Eys.hpp"
 
+// Constructor: Display a message indicating that the "eyes" are opening.
 Eys::Eys() {
     std::cout << "[Eys::Info] Opening eyes!" << std::endl;
 }
+
+// Destructor: Display a message indicating that the "eyes" are closing.
 Eys::~Eys() {
     std::cout << "[Eys::Info] Closing eyes." << std:: endl;
 }
+
+// Open the camera using the GStreamer pipeline.
 int Eys::openEyes() {
-    // A variável cap é uma referência para um objeto VideoCapture, que é uma classe do OpenCV para captura de vídeo
-    // Ele tem como argumento uma string com o pipeline do GStreamer usado para abrir a câmera Raspberry Pi
-    // std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=4 ! videoconvert ! appsink";
+    // The cap variable is a reference to a VideoCapture object, which is an OpenCV class for video capture.
+    // It takes as an argument a string with the GStreamer pipeline used to open the Raspberry Pi camera.
     std::string pipeline = "v4l2src ! video/x-raw,framerate=30/1,width=640,height=480 ! videoflip method=5 ! videoconvert ! appsink";
-    // std::string pipeline = "v4l2src device=/dev/video0 ! video/x-raw,framerate=30/1,width=640,height=480 ! videoconvert ! appsink";
-    cap.set(cv::CAP_PROP_BUFFERSIZE, 2); // O buffer interno armazenará apenas 3 frames
+    // The internal buffer will only store 3 frames.
+    cap.set(cv::CAP_PROP_BUFFERSIZE, 2);
 
-
-    // Abre a câmera usando o GStreamer
+    // Open the camera using GStreamer.
     cap.open(pipeline, cv::CAP_GSTREAMER);
     
-    // Aqui tem a verificação se a câmera foi aberta com sucesso
-    // Se não foi, imprime uma mensagem de erro e retorna -1, que encerrará o programa na hora
+    // Check if the camera was successfully opened.
+    // If not, print an error message and return -1, which will terminate the program immediately.
     if (!cap.isOpened()) {
         std::cerr << "[Eys::Error] Error opening eyes..." << std::endl;
         return -1;
@@ -27,9 +47,9 @@ int Eys::openEyes() {
     return 0;
 }
 
+// Capture a single frame from the camera.
 cv::Mat Eys::spark() {
     cv::Mat frame;
     cap >> frame;
     return frame;
 }
-
