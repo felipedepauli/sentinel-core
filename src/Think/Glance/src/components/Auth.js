@@ -1,15 +1,15 @@
 import axios from 'axios'; // Não esqueça de instalar isso via npm ou yarn
 import { Button } from 'antd';
-import { BsPersonBoundingBox } from "react-icons/bs"; // Não esqueça de instalar isso via npm ou yarn
 import React from 'react';
+import iconMap from './IconMap.js';
 
 const AuthButton = ({ setPersonInfo }) => {
   const authenticate = () => {
     setPersonInfo({
-      name: 'Looking For',
+      name: 'Procurando o inimigo malvado!',
       age: "",
       status: "",
-      description: 'Wait authentication...'
+      description: 'Ai se eu encontro ele....'
     });
 
     axios.get('http://localhost:8081/memory/auth')
@@ -29,8 +29,9 @@ const AuthButton = ({ setPersonInfo }) => {
   }
 
   return (
-    <Button icon={<BsPersonBoundingBox />} onClick={authenticate}>
-    </Button>
+      <Button size="large"  onClick={authenticate}>
+         {iconMap["GiTargetDummy"]}
+      </Button>
   )
 };
 

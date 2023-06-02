@@ -47,7 +47,7 @@ const FrameRenderer = () => {
 // Main application component
 const App = () => {
   // Create states for the person info, drone status and modal visibility
-  const [personInfo, setPersonInfo] = useState({ name: 'Nobody', age: "", status: "", description: '...' });
+  const [personInfo, setPersonInfo] = useState({ name: "Tô de boinha... mas atento!", age: "", status: "", description: '...' });
   const [droneStarted, setDroneStarted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,12 +61,12 @@ const App = () => {
 		<div className="program_name">
       <div className='program_logo'>
         <Image
-          width={230}
-          src="/Logo_.png"
+          width={150}
+          src="/Logo_ED-209.png"
           />
       </div>
 
-      		<h1>Sentinel Eyes</h1>
+      		<h1>Piu Piu Aniquilador</h1>
 		</div>
 		<div className="program_image">	
 				<FrameRenderer />
@@ -77,7 +77,7 @@ const App = () => {
 		<div className='program_panel'>
           
         <div className='controller__section controller__section--left'>
-          <CommandButton command={droneStarted ? "stopDrone" : "startDrone"} text="Toggle drone" icon="TbDrone" toggleIcon="TbDroneOff" onClick={toggleDrone}/>
+          <CommandButton command={droneStarted ? "stopDrone" : "startDrone"} text="Toggle eyes" icon="AiFillFire" toggleIcon="AiOutlineFire" onClick={toggleDrone}/>
         </div>
 
           	<div className='controller__section controller__section--center'>
@@ -97,22 +97,6 @@ const App = () => {
           	<div className='controller__section controller__section--right'>
                 <div>
                   <Auth setPersonInfo={setPersonInfo} />
-                </div>
-                <div>
-                  <div className="disattached">
-                      <Button style={{ backgroundColor: '#fffb8f', borderColor: '#262626', color: '#613400' }} onClick={() => setIsModalOpen(true)}>
-                        Cadastrar
-                      </Button>
-                </div>
-                <CustomModal
-                  isOpen={isModalOpen}
-                  onClose={() => setIsModalOpen(false)}
-                  onSubmit={(event, file) => {
-                    event.preventDefault();
-                    const formData = new FormData(event.target);
-                    formData.append('photo', file);
-                  }}
-                />
                 </div>
           	</div>
             {/* BsPersonBoundingBox */}

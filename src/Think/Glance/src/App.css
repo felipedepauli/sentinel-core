@@ -15,8 +15,8 @@
 
 .program_logo {
   position: absolute;
-  left: 10px;
-  top: 0px;
+  left: 30px;
+  top: 20px;
 }
 .App-header {
   background-color: #282c34;
@@ -63,8 +63,14 @@
 
 .program_desc__block   {
   height: 100%;
+  font-size: 2rem;
+  color: lightslategray;
+  font-family: 'SaxMono', monospace;
 }
-
+.program_desc__block p  {
+  color: lightslategray;
+  font-family: 'Roboto Slab', monospace;
+}
 .main {
   display: grid;
   grid-template-areas:
@@ -78,6 +84,8 @@
   
 .main .program_name {
     grid-area: title;
+    font-family: 'SaxMono', monospace;
+    font-weight: bold;
 }
 .main .program_image {
   grid-area: image;
