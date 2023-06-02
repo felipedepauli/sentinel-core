@@ -4,7 +4,7 @@ import { Button, Image } from 'antd';
 import CommandButton from './components/CommandButtons.js'
 import CustomModal from './components/Modal.js'
 import Auth from "./components/Auth.js"
-import PersonInfoCard from './components/PersonInfoCard';
+import PersonInfoCard from './components/PersonInfoCard.js';
 
 // Importing css style
 import './App.css';

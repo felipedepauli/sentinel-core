@@ -20,11 +20,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Defining the routes for the API
-router.post   ('/memory/add', upload.single('photo'), PersonController.addPerson);
-router.get    ('/memory/get_all_people', PersonController.getAllPeople);
-router.get    ('/memory/auth', PersonController.authPerson);
-router.delete ('/memory/forget', PersonController.forgetPerson);
+router.post   ('/memory/add'            , upload.single('photo'), PersonController.addPerson);
+router.get    ('/memory/get_all_people' , PersonController.getAllPeople);
+router.get    ('/memory/auth'           , PersonController.authPerson);
+router.delete ('/memory/forget'         , PersonController.forgetPerson);
 
 // Exporting the router for use in other modules
 module.exports = router;
-
