@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { Button, Image } from 'antd';
+import { Button } from 'antd';
 import CommandButton from './components/CommandButtons.js'
 import CustomModal from './components/Modal.js'
 import Auth from "./components/Auth.js"
@@ -60,13 +60,13 @@ const App = () => {
     <div className="main">
 		<div className="program_name">
       <div className='program_logo'>
-        <Image
+        <img
           width={230}
           src="/Logo_.png"
           />
       </div>
 
-      		<h1>Sentinel Eyes</h1>
+      <h1>Sentinel Eyes</h1>
 		</div>
 		<div className="program_image">	
 				<FrameRenderer />

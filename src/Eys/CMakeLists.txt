@@ -1,13 +1,19 @@
 cmake_minimum_required(VERSION 3.10)
 project(Eys)
 
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+set(BUILD_SHARED_LIBRARIES OFF)
+set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")
+
 option(CROSS_COMPILE_ARM "Cross compile for ARM" ON)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_SYSTEM_NAME Linux)
 
+set(OpenCV_STATIC ON)
+
 if(CROSS_COMPILE_ARM)
-    set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/platforms/linux/build_hardfp) 
+    set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/build_arm) 
 else()
     set(OpenCV_DIR /home/fpauli/tools/opencv-4.5.4/build_pcx64) 
 endif()
@@ -54,7 +60,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(${EXECUTABLE_NAME} main.cpp WakeUP.cpp Session.cpp Eys.cpp)
 
 # Link the required libraries
-target_link_libraries(${EXECUTABLE_NAME}  ${OpenCV_LIBS} ${Boost_LIBRARIES}  Threads::Threads)
+target_link_libraries(${EXECUTABLE_NAME} ${OpenCV_LIBS} ${Boost_LIBRARIES}  Threads::Threads)
 
 # add_executable(tests your_test_file.cpp)
 # target_link_libraries(tests ${GTEST_BOTH_LIBRARIES} pthread)

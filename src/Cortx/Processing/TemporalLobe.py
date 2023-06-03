@@ -39,9 +39,9 @@ class Detector:
             print(f"No face found in {image_path}.")
             return None
         
-    all_matches = []
 
     def annotate_frame(self, frame):
+        all_matches = []
         # Resize frame of video to 1/4 size for faster face detection processing
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
@@ -89,6 +89,7 @@ class Detector:
         # Se houver um arquivo ../../Think/Memory/storage/faces_bd/synapse
         # enviar o id da pessoa identificada para esse arquivo (é um arquivo FIFO)
         fifo_path = "../Think/Memory/storage/faces_bd/synapse"
+        id = 10
         if os.path.exists(fifo_path):
             print("Check person")
             if True in all_matches:
@@ -97,4 +98,4 @@ class Detector:
                 with open(fifo_path, 'w') as fifo:
                     fifo.write(id)
         
-        return frame
+        return frame, id

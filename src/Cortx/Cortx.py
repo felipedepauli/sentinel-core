@@ -66,7 +66,7 @@ async def connect():
                     nparr = np.frombuffer(frame_data, np.uint8)
                     img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-                    annotated_frame, id = detector.annotate_frame(img_np)
+                    annotated_frame, personId = detector.annotate_frame(img_np)
                     if annotated_frame.size > 0:  # Verifica se o frame não está vazio
                         # Codifica o frame anotado como JPG
                         is_success, buffer = imencode(".jpg", annotated_frame)
@@ -74,7 +74,7 @@ async def connect():
                         # Verifica se a codificação foi bem-sucedida
                         if is_success:
                             # Envia o resultado para o servidor Node.js via WebSocket
-                            data = {"id": id, "frame": base64.b64encode(buffer).decode()}
+                            data = {"id": personId, "frame": base64.b64encode(buffer).decode()}
                             await websocket.send(json.dumps(data))
                             # print(buffer.tobytes()[:10].hex())
                         else:
