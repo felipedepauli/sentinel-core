@@ -38,6 +38,8 @@ class Detector:
         else:
             print(f"No face found in {image_path}.")
             return None
+        
+    all_matches = []
 
     def annotate_frame(self, frame):
         # Resize frame of video to 1/4 size for faster face detection processing

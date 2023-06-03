@@ -29,7 +29,7 @@ const AuthButton = ({ setPersonInfo }) => {
   }
 
   return (
-    <Button icon={<BsPersonBoundingBox />} onClick={authenticate}>
+    <Button size="large" icon={<BsPersonBoundingBox size={27}/>} onClick={authenticate}>
     </Button>
   )
 };

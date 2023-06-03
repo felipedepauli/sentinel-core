@@ -1,74 +1,59 @@
-/**
- * @file   Session.cpp
- * @brief  The Session Source File.
- *
- * This file is part of the Evil Eyes project:
- *   - Website: http://www.aincrivelfabrica.com.br
- *   - GitHub: https://github.com/felipedepauli/evil-eyes
- *
- * License:
- *     Copyright (C) 2023 Felipe Camargo de Pauli
- *     All Rights Reserved.
- *
- *     This source code is provided for viewing purposes only. No part of this source code
- *     may be used, modified, distributed, or sublicensed for any purpose without the
- *     express written consent of the copyright holder.
- */
-
 #include "Session.hpp"
 
-// Constructor for the Session class
-// Initializes the socket and the evilEys_ object
+#include <iostream>
+#include <boost/endian/conversion.hpp>
+#include <boost/bind.hpp>
+#include <chrono>
+
+constexpr uint64_t expected_header = 0x5247424559455345; // "EYESBGR"
+
 Session::Session(boost::asio::ip::tcp::socket socket)
     : socket_(std::move(socket)), evilEys_()
 {
-    // Log the creation of a new session
     std::cout << "[Session::Info] Session created." << std::endl;
 }
 
-// Destructor for the Session class
 Session::~Session() {
-    // Log the end of a session
     std::cout << "[Session::Info] Session finished." << std::endl;
 }
 
-// Starts the session by calling the process function
 void Session::start() {
     process();
 }
 
-// Handles the processing of client requests
 int Session::process() {
-    // Open the camera
+    // If you want to know all the CV conf (done on compilation time)
+    // std::cout << "CV " << cv::getBuildInformation() << std::endl;
+    
+    // Step 01. Open Sentinel's Eyes (camera)
     if (evilEys_.openEyes() != 0) {
         return -1;
     }
 
-    // Define the frame rate and calculate the frame interval
-    const double frameRate = 4.0; // 4 frames per second
+    // Step 02. Define the desired frame rate and alculate the frame interval in milliseconds
+    const double frameRate = 8.0; // 4 frames per second
     const auto   frameInterval = std::chrono::milliseconds(static_cast<int>(1000.0 / frameRate));
 
-    // Loop to handle client requests
     while (true) {
         auto startTime = std::chrono::steady_clock::now(); // Mark the start time
 
-        // Get the frame from the camera
+        // Step 03. Get the frame from Sentinel's Eye
         cv::Mat frame = evilEys_.spark();
 
-        // Check if the frame is empty
         if (frame.empty()) {
             std::cerr << "[Session::Info] Frame is empty!" << std::endl;
             break;
         }
 
-        // Send the frame to the client
+        // Step 04. Send the frame to client
         send_frame(frame);
 
-        // Calculate the elapsed time
+        // Calculate how long it took to capture and send the frame
         auto endTime = std::chrono::steady_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
-        // If the elapsed time is less than the frame interval, sleep for the remaining time
+        // Step 05. If it took less time than the desired frame interval, sleep for the remaining time
+        // It garantees the FPS
         if (elapsedTime < frameInterval) {
             std::this_thread::sleep_for(frameInterval - elapsedTime);
         }
@@ -76,23 +61,40 @@ int Session::process() {
     return 0;
 }
 
-// Sends a frame to the client
 void Session::send_frame(const cv::Mat& frame) {
-    // Send the header to the client
+    // The send_frame function takes a reference to the socket and a reference to the image to be sent
+
+    // Whenever a connection is established, we need to send a header to the client
+    // indicating that the communication is starting. This is done so that the client knows
+    // that the connection is established and it can start receiving data.
+    // The header is a fixed value known by both sides of the connection.
+    // To facilitate implementation, we'll use the fixed and sequential 64-bit value below:
     uint64_t header = expected_header;
     boost::asio::write(socket_, boost::asio::buffer(&header, sizeof(header)));
 
-    // Convert the frame to jpg and store it in a buffer
+    // Whenever we send data to the client, we need to do a few things:
+    // 1. Have a suitable buffer to store the data to be sent
+    // 2. Convert the value to network byte order
+    // 3. Send the buffer size to the client before sending the data
+    // 4. Send the data
+    // Let's follow these steps
+
+    // Step 1. Have a suitable buffer to store the data to be sent
+    // The buffer vector is the frame, but converted to jpg
     std::vector<uchar> buffer;
     cv::imencode(".jpg", frame, buffer);
 
-    // Convert the buffer size to network byte order
+    // Step 2. Convert the value to network byte order
+    // This is necessary because the network byte order is different from the byte order of the computer.
+    // Failing to convert the value to network byte order can cause communication errors.
     std::size_t bufferSize = buffer.size();
     uint64_t bufferSize_network = be64toh(bufferSize);
 
-    // Send the buffer size to the client
+    // Step 3. Send the buffer size to the client before sending the data
+    // This is necessary because the client needs to know how many bytes it should expect to receive
+    // before attempting to read the data. In other words, it knows when the communication starts and when it ends.
     boost::asio::write(socket_, boost::asio::buffer(&bufferSize_network, sizeof(bufferSize_network)));
 
-    // Send the image data to the client
+    // Step 4. Send the image data
     boost::asio::write(socket_, boost::asio::buffer(buffer.data(), bufferSize));
 }

@@ -15,7 +15,7 @@ endif()
 if(CROSS_COMPILE_ARM)
 
     set(CMAKE_SYSTEM_PROCESSOR arm)
-    set(CMAKE_BUILD_TYPE Debug)
+    set(CMAKE_BUILD_TYPE Release)
     set(tools /usr)
     set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
     set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)

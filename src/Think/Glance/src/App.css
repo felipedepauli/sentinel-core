@@ -59,6 +59,9 @@
   align-items: flex-start;
   justify-content: center;
   padding: 0rem;
+  font-family: "Roboto Slab", serif;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .program_desc__block   {
@@ -92,6 +95,16 @@
   grid-area: desc;
   padding: 30px;
 }
+.main .program_desc div.ant-card-head-title {
+  font-family: "SaxMono", monospace;
+  font-size: 1.5em;
+}
+.main .program_desc__block {
+  font-size: 2rem;
+  color: rgb(177, 177, 164);
+  font-family: "SaxMono", monospace;
+}
+
 .main .program_panel {
   grid-area: panel;
   display:  grid;
@@ -113,15 +126,11 @@
 .controller__section--right > div {
   margin: 20px;
 }
-
 .controller__section--center__middle {
   display: flex;
   justify-content: center;
   width: 100%;
 }
-
-
-
 .controller__section--center__top,
 .controller__section--center__bottom {
   display: flex;
