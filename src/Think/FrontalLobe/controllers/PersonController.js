@@ -108,6 +108,9 @@ const PersonController = {
       // Exclui o arquivo FIFO
       fs.unlinkSync(FIFO_PATH);
   
+      if (data == "-1") {
+        throw new Error("no person detected.")
+      }
       // Solicitar ao banco de dados o objeto referente ao id
       const person = await Person.findById(data);
   

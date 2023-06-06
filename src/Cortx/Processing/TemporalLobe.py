@@ -89,13 +89,13 @@ class Detector:
         # Se houver um arquivo ../../Think/Memory/storage/faces_bd/synapse
         # enviar o id da pessoa identificada para esse arquivo (é um arquivo FIFO)
         fifo_path = "../Think/Memory/storage/faces_bd/synapse"
-        id = 10
         if os.path.exists(fifo_path):
+            id = "-1"
             print("Check person")
             if True in all_matches:
                 first_match_index = all_matches.index(True)
                 id = self.known_face_ids[first_match_index]
-                with open(fifo_path, 'w') as fifo:
-                    fifo.write(id)
+            with open(fifo_path, 'w') as fifo:
+                fifo.write(id)
         
-        return frame, id
+        return frame, 0
